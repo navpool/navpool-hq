@@ -1,0 +1,18 @@
+.content {
+  margin: 25px;
+
+  a {
+    color: $purple;
+  }
+
+  a.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    color: $grey;
+  }
+
+  a:hover {
+    color: $lightBlue;
+    text-decoration: none;
+  }
+}

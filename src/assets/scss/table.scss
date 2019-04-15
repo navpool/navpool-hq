@@ -1,0 +1,17 @@
+table {
+}
+
+.tableFilter {
+  clear: both;
+  overflow: hidden;
+
+  ul {
+    float:right;
+    list-style: none;
+
+    li {
+      display: inline;
+      padding-left: 10px;
+    }
+  }
+}
