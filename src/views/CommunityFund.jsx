@@ -10,7 +10,17 @@ import StatusBar from '../components/communityFund/StatusBar';
 import ProposalCard from '../components/communityFund/ProposalCard';
 
 const styles = theme => ({
-
+  progress: {
+    position: 'fixed',
+    top: '64px',
+    left: 0,
+    width: '100%',
+    zIndex: 2000,
+    colorPrimary: {
+      'backgroundColor': '#ff0000'
+    },
+    colorSecondary: '#ffff00',
+  }
 });
 
 class CommunityFund extends Component {
@@ -42,27 +52,27 @@ class CommunityFund extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    const { spacing } = this.state;
-    const { blockCycle } = this.state;
+    const { spacing, blockCycle } = this.state;
 
     return (
       <div>
         <h1>Community Fund</h1>
         <StatusBar blockCycle={blockCycle} />
 
-        <h2>Pending Proposals</h2>
-        <p>The following proposals are current open for voting:</p>
+        <div>
+          <h2>Pending Proposals</h2>
+          <p>The following proposals are current open for voting:</p>
 
-        <Grid container spacing={spacing}>
-          {this.state.proposals.map((p,k) =>
-            <Grid key={k} item xs={12} sm={12} md={6} lg={4} className={classes.section}>
-              <Paper elevation={1} >
-                <ProposalCard proposal={p} blockCycle={blockCycle}/>
-              </Paper>
-            </Grid>
-          )}
-        </Grid>
+          <Grid container spacing={spacing}>
+            {this.state.proposals.map((p,k) =>
+              <Grid key={k} item xs={12} sm={12} md={6} lg={4}>
+                <Paper elevation={2} >
+                  <ProposalCard proposal={p} blockCycle={blockCycle}/>
+                </Paper>
+              </Grid>
+            )}
+          </Grid>
+        </div>
       </div>
     )
   }

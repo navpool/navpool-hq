@@ -59,9 +59,7 @@ const styles = theme => ({
 });
 
 function ProposalCard(props) {
-  const { classes } = props;
-  const { proposal } = props;
-  const { blockCycle } = props;
+  const { classes, proposal, blockCycle } = props;
 
   return (
     <Card className={classes.card}>

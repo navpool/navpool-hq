@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ordinal from "ordinal-js";
+import {FormattedNumber} from "react-intl"
 import {withStyles } from "@material-ui/core/styles/index";
 
 
 const styles = theme => ({
+  root: {
+    width: '100%',
+  },
   progress: {
     backgroundColor: '#f9f9f9',
     border: '1px solid rgba(222,214,201,.75)',
@@ -49,18 +53,18 @@ function ProposalVoteProgress(props) {
   const votesAbstain = ((blockCycle.currentBlock - proposal.votesYes - proposal.votesNo) / blockCycle.blocksInCycle) * 100;
 
   return (
-    <div>
+    <div className={classes.root}>
       <div className={classes.progress}>
         <div className={classes.votesYes} style={{width: votesYes+'%'}} />
         <div className={classes.votesNo} style={{width: votesNo+'%'}} />
         <div className={classes.votesAbstain} style={{width: votesAbstain+'%'}} />
       </div>
-      <span className={classes.left}>
-        Accept {proposal.votesYes} / Reject {proposal.votesNo}
-      </span>
-      <span className={classes.right}>
+      <div className={classes.left}>
+        Accept <FormattedNumber value={proposal.votesYes} /> / Reject <FormattedNumber value={proposal.votesNo} />
+      </div>
+      <div className={classes.right}>
         Cycle {ordinal.toOrdinal(proposal.votingCycle)}
-      </span>
+      </div>
     </div>
   );
 }
