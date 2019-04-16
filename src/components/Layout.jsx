@@ -109,7 +109,7 @@ function ClippedDrawer(props) {
             <div className={classes.toolbar} />
             <List>
               {[routes[6],routes[0],routes[1],routes[2],routes[3]].map((route, index) => (
-                <ListItem button key={index}>
+                <ListItem button key={index} component="a" href={route.path}>
                   <ListItemText primary={route.name} />
                 </ListItem>
               ))}
@@ -117,7 +117,7 @@ function ClippedDrawer(props) {
             <Divider />
             <List>
               {[routes[4], routes[5]].map((route, index) => (
-                <ListItem button key={index}>
+                <ListItem button key={index} component="a" href={route.path}>
                   <ListItemText primary={route.name} />
                 </ListItem>
               ))}
