@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 
-import Layout from "./components/Layout";
+import MainLayout from "./components/layout/MainLayout";
+import LoginLayout from "./components/layout/LoginLayout";
+import {AuthenticationService} from './services/AuthenticationService';
 
 import './assets/scss/app.scss';
 
 class App extends Component {
   render() {
-    return (
-      <Layout/>
-    );
+    if (!AuthenticationService.currentUserValue) {
+      return (<LoginLayout/>);
+    }
+
+    return (<MainLayout/>);
   }
 }
 

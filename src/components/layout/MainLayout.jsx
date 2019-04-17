@@ -8,12 +8,12 @@ import List, {ListItem, ListItemText} from '@material/react-list'
 import '@material/react-top-app-bar/dist/top-app-bar.css'
 import '@material/react-list/dist/list.css'
 
-import Addresses from '../views/Addresses'
-import CommunityFund from '../views/CommunityFund'
-import Dashboard from '../views/Dashboard'
-import Help from '../views/Help'
-import NetworkStats from '../views/NetworkStats'
-import Report from '../views/Report'
+import Addresses from '../../views/Addresses'
+import CommunityFund from '../../views/CommunityFund'
+import Dashboard from '../../views/Dashboard'
+import Help from '../../views/Help'
+import NetworkStats from '../../views/NetworkStats'
+import Report from '../../views/Report'
 
 const routes = [
   {
@@ -42,7 +42,7 @@ const routes = [
   }
 ];
 
-export default class Layout extends Component {
+export default class MainLayout extends Component {
   render() {
     return (
       <Router>
