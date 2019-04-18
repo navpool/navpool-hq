@@ -1,12 +1,15 @@
 import { BehaviorSubject } from 'rxjs';
 
 import { handleResponse } from '../helpers/handle-response';
+let jwt = require('jsonwebtoken');
+
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 export const AuthenticationService = {
   login,
   logout,
+  isAuthenticated,
   currentUser: currentUserSubject.asObservable(),
   get currentUserValue () { return currentUserSubject.value }
 };
@@ -36,4 +39,15 @@ function login(username, password) {
 function logout() {
   localStorage.removeItem('currentUser');
   currentUserSubject.next(null);
+}
+
+function isAuthenticated() {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (currentUser == null) {
+    return false;
+  }
+
+  let decodedToken = jwt.decode(currentUser.token);
+
+  return decodedToken.exp > (Date.now()/1000);
 }

@@ -23,7 +23,7 @@ const styles = theme => ({
   }
 });
 
-class CommunityFund extends Component {
+class CommunityFundPage extends Component {
   state = {
     spacing: 32,
     blockCycle: {
@@ -78,9 +78,9 @@ class CommunityFund extends Component {
   }
 }
 
-CommunityFund.propTypes = {
+CommunityFundPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 
-export default withStyles(styles)(CommunityFund);
+export default withStyles(styles)(CommunityFundPage);

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {IntlProvider} from "react-intl"
-import {Switch, Route, BrowserRouter as Router} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,17 +14,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid'
 
-import CommunityFund from '../../views/CommunityFund'
+import CommunityFundPage from '../../views/CommunityFundPage'
 import Dashboard from '../../views/Dashboard'
 import Help from '../../views/Help'
 import NetworkStats from '../../views/NetworkStats'
 import Report from '../../views/Report'
 import Account from '../../views/Account'
-import Logout from '../../views/Logout'
 import { AuthenticationService } from '../../services/AuthenticationService';
 
 const drawerWidth = 240;
-const locale = "en-US";
 
 const styles = theme => ({
   root: {
@@ -58,7 +55,7 @@ const routes = [
   {
     name: "Community Fund",
     path: "/community-fund",
-    component: CommunityFund,
+    component: CommunityFundPage,
   },
   {
     name: "Network Stats",
@@ -76,11 +73,6 @@ const routes = [
     component: Account,
   },
   {
-    name: "Logout",
-    path: "/logout",
-    component: Logout,
-  },
-  {
     name: "Dashboard",
     path: "/",
     component: Dashboard
@@ -88,59 +80,67 @@ const routes = [
 ];
 
 class MainLayout extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authenticated: AuthenticationService.isAuthenticated(),
+    };
+
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
   handleLogout() {
     AuthenticationService.logout();
+    this.setState({authenticated: false});
   }
 
   render() {
-    const {classes} = this.props;
+    const { classes, children } = this.props;
+    const { authenticated } = this.state;
+
+    if (!authenticated) {
+      return (<Redirect to='/login'/>)
+    }
 
     return (
-      <IntlProvider locale={locale}>
-        <Router>
-          <div className={classes.root}>
-            <CssBaseline/>
-            <AppBar position="fixed" className={classes.appBar}>
-              <Toolbar>
-                <Grid justify="space-between" container spacing={24}>
-                  <Grid item>
-                    <Typography variant="h6" color="inherit" noWrap justifycontent="flex-start">
-                      NavPool HQ
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Toolbar>
-            </AppBar>
-            <Drawer className={classes.drawer} variant="permanent" classes={{paper: classes.drawerPaper}}>
-              <div className={classes.toolbar}/>
-              <List>
-                {[routes[6], routes[0], routes[1], routes[2], routes[3]].map((route, index) => (
-                  <ListItem button key={index} component="a" href={route.path}>
-                    <ListItemText primary={route.name}/>
-                  </ListItem>
-                ))}
-              </List>
-              <Divider/>
-              <List>
-                <ListItem button component="a" href={routes[4].path}>
-                  <ListItemText primary={routes[4].name}/>
-                </ListItem>
-                <ListItem button onClick={this.handleLogout()}>
-                  <ListItemText primary={routes[5].name}/>
-                </ListItem>
-              </List>
-            </Drawer>
-            <main className={classes.content}>
-              <div className={classes.toolbar}/>
-              <Switch>
-                {routes.map((route, index) => (
-                  <Route key={index} path={route.path} component={route.component}/>
-                ))}
-              </Switch>
-            </main>
-          </div>
-        </Router>
-      </IntlProvider>
+      <div className={classes.root}>
+        <CssBaseline/>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <Grid justify="space-between" container spacing={24}>
+              <Grid item>
+                <Typography variant="h6" color="inherit" noWrap justifycontent="flex-start">
+                  NavPool HQ
+                </Typography>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+        <Drawer className={classes.drawer} variant="permanent" classes={{paper: classes.drawerPaper}}>
+          <div className={classes.toolbar}/>
+          <List>
+            {[routes[5], routes[0], routes[1], routes[2], routes[3]].map((route, index) => (
+              <ListItem button key={index} component="a" href={route.path}>
+                <ListItemText primary={route.name}/>
+              </ListItem>
+            ))}
+          </List>
+          <Divider/>
+          <List>
+            <ListItem button component="a" href={routes[4].path}>
+              <ListItemText primary={routes[4].name}/>
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Logout" onClick={this.handleLogout}/>
+            </ListItem>
+          </List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.toolbar}/>
+          {children}
+        </main>
+      </div>
     );
   }
 }

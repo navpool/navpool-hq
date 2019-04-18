@@ -1,29 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from "react-router-dom"
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import Login from  '../auth/Login';
+import {AuthenticationService} from "../../services/AuthenticationService";
 
 const styles = theme => ({
   main: {
-    width: 'auto',
-    display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+    width: '100%',
+    display: 'block',
+    height: '100%',
+    backgroundColor: '#ff0000',
   }
 });
 
 function LoginLayout(props) {
   const { classes } = props;
 
+  if (AuthenticationService.isAuthenticated()) {
+    return (<Redirect to='/'/>)
+  }
+
   return (
     <main className={classes.main}>
-      <Login />
+      {props.children}
     </main>
   );
 }

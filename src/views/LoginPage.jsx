@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { AuthenticationService } from '../../services/AuthenticationService';
+import { Redirect } from 'react-router-dom'
+import { AuthenticationService } from '../services/AuthenticationService';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -7,15 +8,18 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import LoginForm from './LoginForm';
+import LoginForm from '../components/auth/LoginForm';
 
 const styles = theme => ({
   paper: {
-    marginTop: theme.spacing.unit * 8,
+    width: '400px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    marginTop: theme.spacing.unit * 8,
   },
   avatar: {
     margin: theme.spacing.unit,
@@ -30,11 +34,12 @@ const styles = theme => ({
   },
 });
 
-class Login extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      isAuthenticated: false,
       isFetching: false,
       isError: false,
       didInvalidate: false,
@@ -51,7 +56,7 @@ class Login extends Component {
     AuthenticationService.login(username, password)
       .then(
         user => {
-          // this.props.history.push('/');
+          this.setState({isAuthenticated: true})
         },
         error => {
           this.setState((state) => ({
@@ -64,8 +69,12 @@ class Login extends Component {
   }
 
   render() {
-    const { isFetching, isError } = this.state;
+    const { isAuthenticated, isFetching, isError } = this.state;
     const { classes } = this.props;
+
+    if (isAuthenticated) {
+      return (<Redirect to='/'/>)
+    }
 
     return (
       <Paper className={classes.paper}>
@@ -83,8 +92,8 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+LoginPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(LoginPage);

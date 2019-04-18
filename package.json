@@ -14,7 +14,9 @@
     "dotenv": "^7.0.0",
     "formik": "^1.5.2",
     "humanize-duration": "^3.18.0",
+    "jsonwebtoken": "^8.5.1",
     "ordinal-js": "^1.1.0",
+    "prop-types": "^15.5.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-intl": "^2.8.0",
@@ -41,5 +43,8 @@
   "devDependencies": {
     "node-sass": "^4.11.0",
     "reactstrap": "^8.0.0"
+  },
+  "engines": {
+    "npm": "1.4.x"
   }
 }
