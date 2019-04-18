@@ -9,7 +9,6 @@ const styles = theme => ({
     width: '100%',
     display: 'block',
     height: '100%',
-    backgroundColor: '#ff0000',
   }
 });
 
