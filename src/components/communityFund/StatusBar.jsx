@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
+import ordinal from "ordinal-js";
+import {FormattedNumber, FormattedPlural} from "react-intl"
 
-class StatusBar extends Component {
-  className() {
-    return "status status-"+this.props.level;
-  }
+function StatusBar(props) {
+  const { blockCycle } = props;
 
-  render() {
-    return (
-      <div className={this.className()}>
-          Votes counted for block 10,258 of 20,160 in the 151st block cycle.<br/>
-          There are 9,902 blocks remaining.
-      </div>
-    )
-  }
+  return (
+    <div className="status status-info">
+      Votes counted for block <FormattedNumber value={blockCycle.currentBlock} /> of <FormattedNumber value={blockCycle.blocksInCycle} /> in the {ordinal.toOrdinal(blockCycle.cycle)} block cycle.<br/>
+      There <FormattedPlural value={blockCycle.blocksRemaining} one='is' other='are' /> <FormattedNumber value={blockCycle.blocksRemaining} /> <FormattedPlural value={blockCycle.blocksRemaining} one='block' other='blocks' /> remaining.
+    </div>
+  )
 }
 
 export default StatusBar;

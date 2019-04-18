@@ -1,10 +1,6 @@
 @import "colors";
-@import "header";
 @import "content";
-@import "table";
 @import "statusBar";
-
-@import "community-fund/proposal-card";
 
 html {
   margin: 0;
@@ -19,20 +15,34 @@ body {
   color: #3E3F3A;
   text-align: left;
   background-color: $white;
-
 }
 
 h1, h2, h3, h4, h5 {
   font-family: 'Raleway', sans-serif;
   margin: 0;
   padding: 0;
+  font-weight: 400;
 }
 
 h1 {
-  margin-top: 20px;
+  font-size: 2.1875rem;
+}
+
+h2 {
+  margin: 20px 0 10px;
+  font-size: 1.75rem;
+}
+
+h5 {
+  font-size: 1.09375rem;
+}
+
+p {
+  font-size: 1.1rem;
 }
 
 p, li {
+  margin: 0;
   font-family: 'Roboto', sans-serif;
 }
 
