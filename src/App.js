@@ -7,12 +7,23 @@ import {AuthenticationService} from './services/AuthenticationService';
 import './assets/scss/app.scss';
 
 class App extends Component {
-  render() {
-    if (!AuthenticationService.currentUserValue) {
-      return (<LoginLayout/>);
-    }
+  state = {
+    currentUser: null
+  };
 
-    return (<MainLayout/>);
+  componentDidMount() {
+    AuthenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
+  }
+
+  render() {
+    const { currentUser } = this.state;
+
+    return (
+      <div>
+        {!currentUser && <LoginLayout /> }
+        {currentUser && <MainLayout /> }
+      </div>
+    )
   }
 }
 
