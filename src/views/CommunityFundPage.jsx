@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 
-import StatusBar from '../components/communityFund/StatusBar';
-import ProposalCard from '../components/communityFund/ProposalCard';
+import StatusBar from '../components/communityFund/StatusBar'
+import ProposalCard from '../components/communityFund/ProposalCard'
 
-const styles = theme => ({
+const styles = () => ({
   progress: {
     position: 'fixed',
     top: '64px',
@@ -21,7 +21,7 @@ const styles = theme => ({
     },
     colorSecondary: '#ffff00',
   }
-});
+})
 
 class CommunityFundPage extends Component {
   state = {
@@ -33,26 +33,29 @@ class CommunityFundPage extends Component {
       blocksRemaining: 0,
     },
     proposals: [],
-  };
+  }
 
   componentDidMount() {
     axios.get('https://api.navexplorer.com/api/community-fund/block-cycle')
       .then(res => {
         this.setState({
-          blockCycle: res.data
+          blockCycle: res.data,
         });
-      });
+      })
+      .catch({
+        //error msg
+      })
 
     axios.get('https://api.navexplorer.com/api/community-fund/proposal?state=pending')
       .then(res => {
         this.setState({
           proposals: res.data
-        });
-      });
+        })
+      })
   }
 
   render() {
-    const { spacing, blockCycle } = this.state;
+    const { spacing, blockCycle, proposals } = this.state
 
     return (
       <div>
@@ -61,12 +64,12 @@ class CommunityFundPage extends Component {
 
         <div>
           <h2>Pending Proposals</h2>
-          <p>The following proposals are current open for voting:</p>
+          <p>The following proposals are open for voting:</p>
 
           <Grid container spacing={spacing}>
-            {this.state.proposals.map((p,k) =>
+            {proposals.map((p,k) =>
               <Grid key={k} item xs={12} sm={12} md={6} lg={4}>
-                <Paper elevation={2} >
+                <Paper elevation={2}>
                   <ProposalCard proposal={p} blockCycle={blockCycle}/>
                 </Paper>
               </Grid>
@@ -80,7 +83,6 @@ class CommunityFundPage extends Component {
 
 CommunityFundPage.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-
-export default withStyles(styles)(CommunityFundPage);
+export default withStyles(styles)(CommunityFundPage)
