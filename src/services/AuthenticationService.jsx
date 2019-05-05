@@ -1,53 +1,66 @@
-import { BehaviorSubject } from 'rxjs';
+import { handleResponse } from '../helpers/handle-response'
+let jwt = require('jsonwebtoken')
 
-import { handleResponse } from '../helpers/handle-response';
-let jwt = require('jsonwebtoken');
-
-
-const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 export const AuthenticationService = {
   login,
   logout,
   isAuthenticated,
-  currentUser: currentUserSubject.asObservable(),
-  get currentUserValue () { return currentUserSubject.value }
-};
+  getToken,
+}
 
-function login(username, password) {
-  let bodyFormData = new FormData();
-  bodyFormData.set("username", username);
-  bodyFormData.set("password", password);
+function login(username, password, twoFactor) {
+  let bodyFormData = new FormData()
+  bodyFormData.set("username", username)
+  bodyFormData.set("password", password)
+  bodyFormData.set("twoFactor", twoFactor)
 
   const requestOptions = {
     method: 'POST',
     body: bodyFormData,
-  };
+  }
 
-  const url = "http://localhost:8085"; //process.env.NAVPOOL_API_URL
+  const url = "http://localhost:8085" //process.env.NAVPOOL_API_URL
 
   return fetch(url + '/auth/login', requestOptions)
     .then(handleResponse)
     .then(user => {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      currentUserSubject.next(user);
+      localStorage.setItem('currentUser', JSON.stringify(user))
 
-      return user;
-    });
+      return user
+    })
 }
 
 function logout() {
-  localStorage.removeItem('currentUser');
-  currentUserSubject.next(null);
+  localStorage.removeItem('currentUser')
 }
 
 function isAuthenticated() {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const currentUser = getUser()
   if (currentUser == null) {
-    return false;
+    return false
   }
 
-  let decodedToken = jwt.decode(currentUser.token);
+  let decodedToken = jwt.decode(currentUser.token)
 
-  return decodedToken.exp > (Date.now()/1000);
+  return decodedToken.exp > (Date.now()/1000)
+}
+
+function getToken() {
+  const currentUser = getUser()
+  if (currentUser == null) {
+    return null
+  }
+
+  return currentUser.token
+}
+
+function getUser() {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+
+  if (currentUser == null) {
+    return null
+  }
+
+  return currentUser
 }
