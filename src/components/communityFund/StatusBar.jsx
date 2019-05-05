@@ -1,5 +1,5 @@
-import React from 'react';
-import ordinal from "ordinal-js";
+import React from 'react'
+import ordinal from "ordinal-js"
 import {FormattedNumber, FormattedPlural} from "react-intl"
 
 function StatusBar(props) {
@@ -13,4 +13,4 @@ function StatusBar(props) {
   )
 }
 
-export default StatusBar;
+export default StatusBar

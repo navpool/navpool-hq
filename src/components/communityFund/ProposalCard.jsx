@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import humanizeDuration from 'humanize-duration';
-import Card, {CardPrimaryContent, CardActions, CardActionButtons} from '@material/react-card';
-import Button from '@material-ui/core/Button';
-import {withStyles } from "@material-ui/core/styles/index";
-import ProposalVoteProgress from "./ProposalVoteProgress";
+import React from 'react'
+import PropTypes from 'prop-types'
+import humanizeDuration from 'humanize-duration'
+import Card, {CardPrimaryContent, CardActions, CardActionButtons} from '@material/react-card'
+import Button from '@material-ui/core/Button'
+import {withStyles } from "@material-ui/core/styles/index"
+import ProposalVoteProgress from "./ProposalVoteProgress"
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     marginTop: '20px',
   },
@@ -56,7 +56,7 @@ const styles = theme => ({
       margin: '10px',
     }
   }
-});
+})
 
 function ProposalCard(props) {
   const { classes, proposal, blockCycle } = props;
@@ -93,7 +93,7 @@ function ProposalCard(props) {
 ProposalCard.propTypes = {
   classes: PropTypes.object.isRequired,
   proposal: PropTypes.object.isRequired,
-};
+}
 
 
-export default withStyles(styles)(ProposalCard);
+export default withStyles(styles)(ProposalCard)

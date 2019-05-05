@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ordinal from "ordinal-js";
+import PropTypes from 'prop-types'
+import ordinal from "ordinal-js"
 import {FormattedNumber} from "react-intl"
-import {withStyles } from "@material-ui/core/styles/index";
+import {withStyles } from "@material-ui/core/styles/index"
 
-
-const styles = theme => ({
+const styles = () => ({
   root: {
     width: '100%',
   },
@@ -44,9 +43,7 @@ const styles = theme => ({
 });
 
 function ProposalVoteProgress(props) {
-  const {classes} = props;
-  const {proposal} = props;
-  const {blockCycle} = props;
+  const {classes, proposal, blockCycle} = props;
 
   const votesYes = (proposal.votesYes / blockCycle.blocksInCycle) * 100;
   const votesNo = (proposal.votesNo / blockCycle.blocksInCycle) * 100;
@@ -66,14 +63,14 @@ function ProposalVoteProgress(props) {
         Cycle {ordinal.toOrdinal(proposal.votingCycle)}
       </div>
     </div>
-  );
+  )
 }
 
 ProposalVoteProgress.propTypes = {
   classes: PropTypes.object.isRequired,
   proposal: PropTypes.object.isRequired,
   blockCycle: PropTypes.object.isRequired,
-};
+}
 
 
-export default withStyles(styles)(ProposalVoteProgress);
+export default withStyles(styles)(ProposalVoteProgress)
