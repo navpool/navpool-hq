@@ -3,15 +3,24 @@ import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import withStyles from "@material-ui/core/styles/withStyles";
+import SnackbarContent from '@material-ui/core/SnackbarContent'
+import withStyles from "@material-ui/core/styles/withStyles"
 
 const styles = theme => ({
   snackbar: {
     marginTop: theme.spacing.unit,
     backgroundColor: theme.palette.error.dark,
+  },
+  actions: {
+    marginTop: theme.spacing.unit * 4
+  },
+  purple: {
+    backgroundColor: "#7d5ab5",
+    '&:hover': {
+      backgroundColor: "#5d3f8d",
+    },
   }
-});
+})
 
 class LoginForm extends Component {
   static propTypes = {
@@ -24,13 +33,15 @@ class LoginForm extends Component {
   state = {
     username: '',
     password: '',
-  };
+    twoFactor: '',
+  }
 
   reset() {
-    this.setState((state) => ({
+    this.setState({
       username: '',
       password: '',
-    }))
+      twoFactor: '',
+    })
   }
 
   handleChange = (event) => {
@@ -39,24 +50,24 @@ class LoginForm extends Component {
     this.setState({ [field]: value })
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = () => {
     this.props.handleSubmit(this.state, () => this.reset())
-  };
+  }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, twoFactor } = this.state;
     const { classes, isFetching, isError } = this.props;
 
     return (
       <ValidatorForm ref="form" onSubmit={this.handleSubmit}>
-        { isError && <SnackbarContent className={classes.snackbar} message="Username or password incorrect" /> }
+        { isError && <SnackbarContent className={classes.snackbar} message="Username, password or 2FA incorrect" /> }
 
         <TextValidator
           fullWidth
           label="Username"
           onChange={this.handleChange}
           name="username"
-          autoComplete={"username"}
+          autoComplete={"off"}
           value={username}
           validators={['required']}
           errorMessages={['this field is required']}
@@ -68,19 +79,31 @@ class LoginForm extends Component {
           type='password'
           onChange={this.handleChange}
           name="password"
-          autoComplete={"current-password"}
+          autoComplete={"off"}
           value={password}
           validators={['required']}
           errorMessages={['this field is required']}
           margin="normal"
         />
 
-        <Button variant="contained" fullWidth color="primary" type="submit" disabled={isFetching} margin="normal">
-          {isFetching && <CircularProgress size={20} />} Login
-        </Button>
+        <TextValidator
+          fullWidth
+          label="Two factor authentication"
+          onChange={this.handleChange}
+          name="twoFactor"
+          autoComplete={"off"}
+          value={twoFactor}
+          margin="normal"
+        />
+
+        <div className={classes.actions}>
+          <Button variant="contained" fullWidth color="primary" type="submit" disabled={isFetching} margin="normal" className={classes.purple}>
+            {isFetching && <CircularProgress size={20} />} Login
+          </Button>
+        </div>
       </ValidatorForm>
     )
   }
 }
 
-export default withStyles(styles)(LoginForm);
+export default withStyles(styles)(LoginForm)
