@@ -6,5 +6,5 @@ export default function RouteWithLayout({layout, component, ...rest}) {
     <Route {...rest} render={(props) =>
       React.createElement(layout, props, React.createElement(component, props))
     }/>
-  );
+  )
 }
