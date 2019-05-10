@@ -2,19 +2,19 @@ import React, {Component} from 'react'
 
 import {withStyles } from "@material-ui/core/styles/index"
 import classNames from 'classnames';
-import Paper from "@material-ui/core/Paper";
+import Paper from "@material-ui/core/Paper/index";
 import orange from '@material-ui/core/colors/orange';
 import green from '@material-ui/core/colors/green';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import red from '@material-ui/core/colors/red';
-import IconButton from "@material-ui/core/IconButton";
+import IconButton from "@material-ui/core/IconButton/index";
 import CloseIcon from '@material-ui/icons/Close';
 
 const styles = theme => ({
   root: {
     color: "#ffffff",
     marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit * 4,
+    marginBottom: theme.spacing.unit,
     padding: theme.spacing.unit * 1.5,
     backgroundColor: "#42b6eb",
   },
