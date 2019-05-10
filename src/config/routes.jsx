@@ -4,8 +4,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PeopleIcon from '@material-ui/icons/People';
-// import BarChartIcon from '@material-ui/icons/BarChart';
-// import HelpIcon from '@material-ui/icons/Help';
 
 import Dashboard from '../components/Dashboard'
 import Account from '../components/account/Account'
@@ -17,13 +15,30 @@ import CommunityFund from "../components/community-fund/CommunityFund";
 import Login from "../components/authentication/Login";
 import MainLayout from "../components/layouts/MainLayout";
 import LoginLayout from "../components/layouts/LoginLayout";
+import CommunityFundProposals from "../components/community-fund-proposals/CommunityFundProposals";
 
 export const routes = {
-  LOGIN: {
-    component: Login,
-    path: "/login",
-    layout: LoginLayout,
-    secure: false,
+  HOMEPAGE: {
+    component: Dashboard,
+    path: "/",
+    layout: MainLayout,
+    secure: true,
+    name: "Dashboard",
+    icon: <HomeIcon/>,
+  },
+  ACCOUNT: {
+    component: Account,
+    path: "/account",
+    name: "Account",
+    layout: MainLayout,
+    secure: true,
+    icon: <AccountCircleIcon />,
+  },
+  ACCOUNT_SECURITY: {
+    component: AccountSecurity,
+    path: "/account/security",
+    layout: MainLayout,
+    secure: true,
   },
   ADDRESS: {
     component: Address,
@@ -53,6 +68,18 @@ export const routes = {
     name: "Community Fund",
     icon: <PeopleIcon />,
   },
+  COMMUNITY_FUND_PROPOSALS: {
+    component: CommunityFundProposals,
+    path: "/community-fund/proposals",
+    layout: MainLayout,
+    secure: true,
+  },
+  LOGIN: {
+    component: Login,
+    path: "/login",
+    layout: LoginLayout,
+    secure: false,
+  },
   // {
   //   name: "Network Stats",
   //   path: "/network",
@@ -65,26 +92,4 @@ export const routes = {
   //   component: HelpPage,
   //   icon: <HelpIcon />,
   // },
-  ACCOUNT: {
-    component: Account,
-    path: "/account",
-    name: "Account",
-    layout: MainLayout,
-    secure: true,
-    icon: <AccountCircleIcon />,
-  },
-  ACCOUNT_SECURITY: {
-    component: AccountSecurity,
-    path: "/account/security",
-    layout: MainLayout,
-    secure: true,
-  },
-  HOMEPAGE: {
-    component: Dashboard,
-    path: "/",
-    layout: MainLayout,
-    secure: true,
-    name: "Dashboard",
-    icon: <HomeIcon/>,
-  },
 };
