@@ -11,8 +11,6 @@ export const accountService = {
 const apiUrl = process.env.REACT_APP_API_URL
 
 function getAccount() {
-
-
   return fetch(apiUrl+"/account", {
     headers: authHeader()
   })
@@ -23,7 +21,7 @@ function getAccount() {
 }
 
 function changePassword(currentPassword, newPassword, confirmPassword) {
-  return fetch("http://localhost:8085/account/password", {
+  return fetch(apiUrl+"/account/password", {
     method: 'POST',
     headers: authHeader(),
     body: JSON.stringify({currentPassword, newPassword, confirmPassword})
@@ -35,7 +33,7 @@ function changePassword(currentPassword, newPassword, confirmPassword) {
 }
 
 function activateTwoFactor() {
-  return fetch("http://localhost:8085/2fa/activate", {
+  return fetch(apiUrl+"/2fa/activate", {
     headers: authHeader()
   })
     .then((response) => handleResponse(response, true))
@@ -45,7 +43,7 @@ function activateTwoFactor() {
 }
 
 function enableTwoFactor(verificationCode) {
-  return fetch('http://localhost:8085/2fa/enable', {
+  return fetch(apiUrl+"/2fa/enable", {
     method: 'POST',
     headers: authHeader(),
     body: JSON.stringify({code: verificationCode})
@@ -57,7 +55,7 @@ function enableTwoFactor(verificationCode) {
 }
 
 function disableTwoFactor(verificationCode) {
-  return fetch('http://localhost:8085/2fa/disable', {
+  return fetch(apiUrl+"/2fa/disable", {
     method: 'POST',
     headers: authHeader(),
     body: JSON.stringify({code: verificationCode})

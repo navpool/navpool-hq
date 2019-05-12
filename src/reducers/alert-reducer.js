@@ -20,6 +20,12 @@ export function alert(state = {}, action) {
         message: action.message
       }
 
+    case constants.ERROR:
+      return {
+        type: 'error',
+        message: action.message
+      }
+
     case constants.CLEAR:
       return {}
 

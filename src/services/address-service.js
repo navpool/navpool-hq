@@ -6,8 +6,10 @@ export const addressService = {
   removeAddress,
 }
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 function getAddresses() {
-  return fetch("http://localhost:8085/address", {
+  return fetch(apiUrl+"/address", {
     headers: authHeader()
   })
     .then(response => handleResponse(response, true))
@@ -17,7 +19,7 @@ function getAddresses() {
 }
 
 function addAddress(hash, signature) {
-  return fetch("http://localhost:8085/address", {
+  return fetch(apiUrl+"/address", {
     method: 'POST',
     headers: authHeader(),
     body: JSON.stringify({hash, signature})
@@ -29,7 +31,7 @@ function addAddress(hash, signature) {
 }
 
 function removeAddress(address) {
-  return fetch("http://localhost:8085/address/"+address.id, {
+  return fetch(apiUrl+"/address", {
     method: 'DELETE',
     headers: authHeader()
   })

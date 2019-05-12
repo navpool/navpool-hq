@@ -6,6 +6,8 @@ export const authenticationService = {
   isLoggedIn
 }
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 function login(username, password, twoFactor) {
   let bodyFormData = new FormData()
   bodyFormData.set("username", username)
@@ -17,9 +19,7 @@ function login(username, password, twoFactor) {
     body: bodyFormData,
   }
 
-  const url = "http://localhost:8085" //process.env.API_URL
-
-  return fetch(url + '/auth/login', requestOptions)
+  return fetch(apiUrl+"/auth/login", requestOptions)
     .then((response) => handleResponse(response))
     .then(user => {
       localStorage.setItem('user', JSON.stringify(user))

@@ -61,7 +61,6 @@ class CardAddress extends Component {
   render() {
     const {classes, address} = this.props
 
-    console.log(this.props)
     return (
       <Card className={classes.root}>
         <CardHeader className={classes.cardHeader} classes={{ avatar: classes.avatar }}

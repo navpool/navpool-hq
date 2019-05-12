@@ -1,3 +1,5 @@
 export * from './account-service'
 export * from './address-service'
 export * from './authentication-service'
+export * from './cfund-payment-request-service'
+export * from './cfund-proposal-service'

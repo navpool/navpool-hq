@@ -1,5 +1,5 @@
-import { authenticationConstants as constants } from '../constants/authentication-constants'
-import {authenticationService as service} from "../services/authentication-service";
+import { authenticationConstants as constants } from '../constants'
+import { authenticationService as service } from "../services";
 
 const initialState = {
   authenticated: service.isLoggedIn(),

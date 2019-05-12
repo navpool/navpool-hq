@@ -24,7 +24,7 @@ class Account extends Component {
       <Page title="Account">
         <PanelPersonalDetails />
         <PanelSecurity />
-        <PanelPassword />
+        {/*<PanelPassword />*/}
       </Page>
     )
   }
