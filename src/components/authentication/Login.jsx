@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import { connect } from 'react-redux'
 import {isMobileOnly} from 'react-device-detect';
 
@@ -13,7 +14,6 @@ import LoginForm from "./LoginForm";
 import {authenticationActions as actions } from '../../actions'
 import {authenticationService as service} from "../../services";
 import {routes} from "../../config/routes";
-import {Link} from "react-router-dom";
 import StatusBar from "../StatusBar";
 
 const styles = theme => ({

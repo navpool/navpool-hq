@@ -18,6 +18,7 @@ import LoginLayout from "../components/layouts/LoginLayout";
 import CommunityFundProposals from "../components/community-fund-proposals/CommunityFundProposals";
 import CommunityFundPaymentRequests from "../components/community-fund-payment-requests/CommunityFundPaymentRequests";
 import Register from "../components/authentication/Register";
+import HelpAddressVerification from "../components/help/HelpAddressVerification";
 
 export const routes = {
   HOMEPAGE: {
