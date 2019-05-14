@@ -1,6 +1,7 @@
 import {handleResponse} from "../helpers";
 
 export const authenticationService = {
+  register,
   login,
   logout,
   isLoggedIn
@@ -20,6 +21,26 @@ function login(username, password, twoFactor) {
   }
 
   return fetch(apiUrl+"/auth/login", requestOptions)
+    .then((response) => handleResponse(response))
+    .then(user => {
+      localStorage.setItem('user', JSON.stringify(user))
+
+      return user
+    })
+}
+
+function register(username, password, passwordConfirm) {
+  let bodyFormData = new FormData()
+  bodyFormData.set("username", username)
+  bodyFormData.set("password", password)
+  bodyFormData.set("passwordConfirm", passwordConfirm)
+
+  const requestOptions = {
+    method: 'POST',
+    body: bodyFormData,
+  }
+
+  return fetch(apiUrl+"/auth/register", requestOptions)
     .then((response) => handleResponse(response))
     .then(user => {
       localStorage.setItem('user', JSON.stringify(user))

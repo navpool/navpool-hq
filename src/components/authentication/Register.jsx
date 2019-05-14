@@ -9,10 +9,9 @@ import Paper from "@material-ui/core/Paper/index";
 import Avatar from "@material-ui/core/Avatar/index";
 import Typography from "@material-ui/core/Typography/index";
 
-import LoginForm from "./LoginForm";
-import {authenticationActions as actions } from '../../actions'
 import {authenticationService as service} from "../../services";
 import {routes} from "../../config/routes";
+import RegisterForm from "./RegisterForm";
 import {Link} from "react-router-dom";
 import StatusBar from "../StatusBar";
 
@@ -77,7 +76,7 @@ class Login extends React.Component {
     super(props)
 
     if (service.isLoggedIn()) {
-      this.props.dispatch(actions.logout())
+      this.props.history.push(routes.HOMEPAGE.path)
     }
   }
 
@@ -93,13 +92,13 @@ class Login extends React.Component {
             </Avatar>
 
             <Typography component="h1" variant="h5">NavPool HQ</Typography>
-            <Typography component="h2" variant="h6">Login to your account</Typography>
+            <Typography component="h2" variant="h6">Create a new account</Typography>
 
             {alert.message && <StatusBar variant={alert.type} text={alert.message} />}
 
-            <LoginForm />
+            <RegisterForm />
 
-            <p>Need an account? <Link component={Link} to={routes.REGISTER.path}>Sign up</Link></p>
+            <p>Already Registered? <Link component={Link} to={routes.LOGIN.path}>Login</Link></p>
           </Paper>
           <p className={classes.love}>Made with <FavoriteIcon className={classes.favorite} /> by the Nav community</p>
         </div>

@@ -17,6 +17,7 @@ import MainLayout from "../components/layouts/MainLayout";
 import LoginLayout from "../components/layouts/LoginLayout";
 import CommunityFundProposals from "../components/community-fund-proposals/CommunityFundProposals";
 import CommunityFundPaymentRequests from "../components/community-fund-payment-requests/CommunityFundPaymentRequests";
+import Register from "../components/authentication/Register";
 
 export const routes = {
   HOMEPAGE: {
@@ -84,6 +85,12 @@ export const routes = {
   LOGIN: {
     component: Login,
     path: "/login",
+    layout: LoginLayout,
+    secure: false,
+  },
+  REGISTER: {
+    component: Register,
+    path: "/register",
     layout: LoginLayout,
     secure: false,
   },

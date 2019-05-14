@@ -23,11 +23,21 @@ const styles = theme => ({
   }
 })
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   state = {
     username: '',
     password: '',
-    twoFactor: '',
+    passwordConfirm: '',
+  }
+
+  componentDidMount() {
+    this.props.dispatch(actions.registerOpen())
+
+    this.setState({
+      username: '',
+      password: '',
+      passwordConfirm: '',
+    })
   }
 
   handleChange = (event) => {
@@ -37,18 +47,18 @@ class LoginForm extends Component {
   };
 
   handleSubmit = () => {
-    const {username, password, twoFactor} = this.state;
+    const {username, password, passwordConfirm} = this.state;
 
-    this.props.dispatch(actions.login(username, password, twoFactor))
+    this.props.dispatch(actions.register(username, password, passwordConfirm))
   }
 
   render() {
-    const { username, password, twoFactor } = this.state;
+    const { username, password, passwordConfirm } = this.state;
     const { classes, authentication } = this.props;
 
     return (
       <ValidatorForm ref="form" onSubmit={this.handleSubmit}>
-        { authentication.error && <StatusBar variant="error" text="Unable to login" list={authentication.error} /> }
+        { authentication.error && <StatusBar variant="error" text="Unable to register account" list={authentication.error} /> }
 
         <TextValidator
           fullWidth
@@ -73,14 +83,16 @@ class LoginForm extends Component {
           errorMessages={['this field is required']}
           margin="normal"
         />
-
         <TextValidator
           fullWidth
-          label="Two factor authentication"
+          label="Confirm password"
+          type='password'
           onChange={this.handleChange}
-          name="twoFactor"
+          name="passwordConfirm"
           autoComplete={"off"}
-          value={twoFactor}
+          value={passwordConfirm}
+          validators={['required']}
+          errorMessages={['this field is required']}
           margin="normal"
         />
 
@@ -93,7 +105,7 @@ class LoginForm extends Component {
                   margin="normal"
                   className={classes.purple}
           >
-            {authentication.loggingIn && <CircularProgress size={20} />} Login
+            {authentication.registering && <CircularProgress size={20} />} Register
           </Button>
         </Actions>
       </ValidatorForm>
@@ -105,4 +117,4 @@ const mapStateToProps = state => ({
   authentication: state.authentication,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(LoginForm))
+export default connect(mapStateToProps)(withStyles(styles)(RegisterForm))
