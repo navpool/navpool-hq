@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 
 import Page from "../Page";
-import PanelPassword from "./PanelPassword";
+// import PanelPassword from "./PanelPassword";
 import PanelPersonalDetails from "./PanelPersonalDetails";
 import PanelSecurity from "./PanelSecurity";
 
