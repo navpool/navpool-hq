@@ -4,6 +4,7 @@ import Heading from "./Heading";
 
 class Dashboard extends React.Component {
   render() {
+    console.log("DASHBOARD");
     return (
       <div>
         <Heading title="Dashboard" />

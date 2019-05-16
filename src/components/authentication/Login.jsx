@@ -99,7 +99,7 @@ class Login extends React.Component {
 
             <LoginForm />
 
-            <p>Need an account? <Link component={Link} to={routes.REGISTER.path}>Sign up</Link></p>
+            <p>Need an account? <Link to={routes.REGISTER.path}>Sign up</Link></p>
           </Paper>
           <p className={classes.love}>Made with <FavoriteIcon className={classes.favorite} /> by the Nav community</p>
         </div>
