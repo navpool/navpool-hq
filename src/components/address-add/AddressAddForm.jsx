@@ -94,7 +94,7 @@ class AddressAddForm extends Component {
           margin="normal"
         />
 
-        <a onClick={this.modalVerificationOpen}>What is a verification signature?</a>
+        <Button onClick={this.modalVerificationOpen}>What is a verification signature?</Button>
 
         <Actions>
           <Button variant="contained" type="submit" disabled={address.addingAddress} className={classes.purpleButton} size="small">
