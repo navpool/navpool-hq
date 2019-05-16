@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import {history} from "../../helpers";
-import {alertActions, authenticationActions} from "../../actions";
+import {alertActions} from "../../actions";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
@@ -21,7 +21,6 @@ class LoginLayout extends Component {
 
     history.listen((location, action) => {
       dispatch(alertActions.clear())
-      dispatch(authenticationActions.refresh())
     })
   }
 

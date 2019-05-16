@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {routes} from "../../config/routes";
@@ -27,11 +27,10 @@ class AddressAdd extends Component {
         <Page title="Addresses">
           <Panel title="Add new address">
             <p>
-              To add a new address to your pool account you'll need the public hash of the address and a signature to prove ownership.<br/>
-              {/*<Link>What is a verification signature?</Link>*/}
+              To add a new address to your pool account you'll need the public hash of the address and a signature to prove ownership.
             </p>
 
-            <AddressAddForm handleCancel={() => this.handleAddCancel()}/>
+            <AddressAddForm handleCancel={() => this.handleAddCancel()} />
 
             {/*<Divider />*/}
             {/*<h4>Follow these steps to create a verification signature:</h4>*/}

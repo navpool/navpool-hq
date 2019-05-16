@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import { connect } from 'react-redux'
 import {isMobileOnly} from 'react-device-detect';
 
@@ -13,7 +14,6 @@ import LoginForm from "./LoginForm";
 import {authenticationActions as actions } from '../../actions'
 import {authenticationService as service} from "../../services";
 import {routes} from "../../config/routes";
-import {Link} from "react-router-dom";
 import StatusBar from "../StatusBar";
 
 const styles = theme => ({
@@ -99,7 +99,7 @@ class Login extends React.Component {
 
             <LoginForm />
 
-            <p>Need an account? <Link component={Link} to={routes.REGISTER.path}>Sign up</Link></p>
+            <p>Need an account? <Link to={routes.REGISTER.path}>Sign up</Link></p>
           </Paper>
           <p className={classes.love}>Made with <FavoriteIcon className={classes.favorite} /> by the Nav community</p>
         </div>

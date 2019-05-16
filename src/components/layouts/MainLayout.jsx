@@ -64,9 +64,10 @@ class MainLayout extends Component {
 
     const { dispatch } = this.props;
 
+    dispatch(authenticationActions.refresh())
+
     history.listen((location, action) => {
       dispatch(alertActions.clear())
-      dispatch(authenticationActions.refresh())
     })
   }
 

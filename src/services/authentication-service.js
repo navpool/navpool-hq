@@ -1,10 +1,11 @@
-import {handleResponse} from "../helpers";
+import {authHeader, handleResponse} from "../helpers";
 
 export const authenticationService = {
   register,
   login,
   logout,
-  isLoggedIn
+  isLoggedIn,
+  refresh,
 }
 
 const apiUrl = process.env.REACT_APP_API_URL
@@ -54,5 +55,35 @@ function logout() {
 }
 
 function isLoggedIn() {
-  return !!localStorage.getItem('user')
+  if (!localStorage.getItem('user')) {
+    return false;
+  }
+
+  let user
+
+  try {
+    user = JSON.parse(localStorage.getItem('user'))
+  } catch(e) {
+    logout()
+    return false
+  }
+
+  if (!user.hasOwnProperty('expire')){
+    logout()
+    return false
+  }
+
+  return new Date(user.expire) > new Date()
+}
+
+function refresh() {
+  return fetch(apiUrl+"/auth/refresh-token", {
+    headers: authHeader()
+  })
+    .then((response) => handleResponse(response))
+    .then(user => {
+      localStorage.setItem('user', JSON.stringify(user))
+
+      return user
+    })
 }

@@ -10,6 +10,8 @@ import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import {addressActions as actions} from "../../actions";
 import StatusBar from "../StatusBar";
 import Actions from "../Actions";
+import {Modal} from "@material-ui/core";
+import HelpAddressVerification from "../help/HelpAddressVerification";
 
 const styles = () => ({
   purpleButton: {
@@ -24,6 +26,7 @@ const styles = () => ({
 const defaultState = {
   hash: '',
   signature: '',
+  modalVerificationOpen: false,
 }
 
 class AddressAddForm extends Component {
@@ -51,8 +54,16 @@ class AddressAddForm extends Component {
     this.props.handleCancel()
   }
 
+  modalVerificationOpen = () => {
+    this.setState({ modalVerificationOpen: true });
+  };
+
+  modalVerificationClose = () => {
+    this.setState({ modalVerificationOpen: false });
+  };
+
   render() {
-    const { hash, signature } = this.state
+    const { hash, signature, modalVerificationOpen } = this.state
     const { classes, address } = this.props
 
     return (
@@ -83,12 +94,22 @@ class AddressAddForm extends Component {
           margin="normal"
         />
 
+        <Button onClick={this.modalVerificationOpen}>What is a verification signature?</Button>
+
         <Actions>
           <Button variant="contained" type="submit" disabled={address.addingAddress} className={classes.purpleButton} size="small">
             {address.addingAddress && <CircularProgress size={20} />} Add Address
           </Button>
           <Button variant="contained" color="secondary" onClick={this.handleCancel} size="small">Cancel</Button>
         </Actions>
+
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={modalVerificationOpen}
+          onClose={this.modalVerificationClose}>
+          <HelpAddressVerification />
+        </Modal>
       </ValidatorForm>
     )
   }
