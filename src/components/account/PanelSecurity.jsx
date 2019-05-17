@@ -33,7 +33,7 @@ class PanelSecurity extends Component {
         </p>
 
         <Actions>
-          <Button className={classes.purpleButton} component={Link} to={routes.ACCOUNT_SECURITY.path} size="small">
+          <Button className={classes.purpleButton} component={Link} to={routes.ACCOUNT_SECURITY.path}>
             {active ? 'Disable' : 'Enable'}
           </Button>
         </Actions>

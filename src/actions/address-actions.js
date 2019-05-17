@@ -5,7 +5,7 @@ import {alertActions} from "./alert-actions";
 export const addressActions = {
   getAddresses,
   addAddress,
-  removeAddressOpen,
+  removeAddressLoad,
   removeAddress
 };
 
@@ -20,14 +20,14 @@ function getAddresses() {
         },
         error => {
           dispatch(failure(error));
-          dispatch(alertActions.warning(error));
+          dispatch(alertActions.error(error));
         }
       )
   }
 
-  function request() {return {type: constants.LOAD_ADDRESSES}}
-  function success(addresses) {return {type: constants.LOADED_ADDRESSES, addresses}}
-  function failure(error) {return {type: constants.FAILED_ADDRESSES, error}}
+  function request() {return {type: constants.ADDRESSES_LOAD_REQUEST}}
+  function success(addresses) {return {type: constants.ADDRESSES_LOAD_SUCCESS, addresses}}
+  function failure(error) {return {type: constants.ADDRESSES_LOAD_FAILURE, error}}
 }
 
 function addAddress(hash, signature) {
@@ -51,29 +51,45 @@ function addAddress(hash, signature) {
   function failure(error) { return { type: constants.ADD_ADDRESS_FAILURE, error } }
 }
 
-function removeAddressOpen(key) {
-  return { type: constants.REMOVE_ADDRESS_OPEN, key }
+function removeAddressLoad(address) {
+  return dispatch => {
+    dispatch(request(address));
+
+    service.getAddress(address)
+      .then(
+        address => {
+          dispatch(success(address));
+        },
+        error => {
+          dispatch(failure(error));
+          dispatch(alertActions.error(error));
+        }
+      )
+  }
+
+  function request(address) {return {type: constants.REMOVE_ADDRESS_LOAD_REQUEST, address}}
+  function success(address) {return {type: constants.REMOVE_ADDRESS_LOAD_SUCCESS, address}}
+  function failure(error) {return {type: constants.REMOVE_ADDRESS_LOAD_FAILURE, error}}
 }
 
 function removeAddress(address) {
   return dispatch => {
-    const selectedAddress = address.addresses[address.removeAddress]
+    dispatch(request({address}));
 
-    dispatch(request({selectedAddress}));
-
-    service.removeAddress(selectedAddress)
+    service.removeAddress(address.id)
       .then(
         () => {
-          dispatch(success(selectedAddress));
-          dispatch(alertActions.info('The `'+selectedAddress.spending_address+'` address has been removed to your account'));
+          dispatch(success(address));
+          dispatch(alertActions.info('The `'+address.spending_address+'` address has been removed to your account'));
         },
         error => {
           dispatch(failure(error));
+          dispatch(alertActions.error(error));
         }
       );
   }
 
-  function request(selectedAddress) { return { type: constants.REMOVE_ADDRESS_REQUEST, selectedAddress } }
-  function success(selectedAddress) { return { type: constants.REMOVE_ADDRESS_SUCCESS, selectedAddress } }
+  function request(address) { return { type: constants.REMOVE_ADDRESS_REQUEST, address } }
+  function success(address) { return { type: constants.REMOVE_ADDRESS_SUCCESS, address } }
   function failure(error) { return { type: constants.REMOVE_ADDRESS_FAILURE, error } }
 }

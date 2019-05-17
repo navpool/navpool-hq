@@ -39,7 +39,7 @@ class CommunityFund extends React.Component {
           <p>NavPool stakers are able to vote for NavCoin community fund proposals.</p>
           <p>There are {proposals.proposals.length} proposals open for voting.</p>
           <Actions>
-            <Button variant="contained" component={Link} to={routes.COMMUNITY_FUND_PROPOSALS.path} size="small" className={classes.purpleButton}>View proposals</Button>
+            <Button variant="contained" component={Link} to={routes.COMMUNITY_FUND_PROPOSALS.path} className={classes.purpleButton}>View proposals</Button>
           </Actions>
         </Panel>
 
@@ -47,7 +47,7 @@ class CommunityFund extends React.Component {
           <p>Once a proposal has been accepted the proposal owner is able to request payment.</p>
           <p>There are {paymentRequests.paymentRequests.length} payment requests open for voting.</p>
           <Actions>
-            <Button variant="contained" component={Link} to={routes.COMMUNITY_FUND_PAYMENT_REQUESTS.path} size="small" className={classes.purpleButton}>View payment requests</Button>
+            <Button variant="contained" component={Link} to={routes.COMMUNITY_FUND_PAYMENT_REQUESTS.path} className={classes.purpleButton}>View payment requests</Button>
           </Actions>
         </Panel>
       </Page>

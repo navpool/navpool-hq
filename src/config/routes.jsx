@@ -58,7 +58,7 @@ export const routes = {
   },
   ADDRESS_REMOVE: {
     component: AddressRemove,
-    path: "/addresses/remove",
+    path: "/addresses/remove/:id",
     layout: MainLayout,
     secure: true,
   },
@@ -107,3 +107,13 @@ export const routes = {
   //   icon: <HelpIcon />,
   // },
 };
+
+export function path(route, params) {
+  let path = route.path
+
+  for (let param in params) {
+    path = path.replace(":"+param, params[param])
+  }
+
+  return path;
+}

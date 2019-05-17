@@ -5,6 +5,8 @@ import {withRouter} from "react-router-dom";
 import {routes} from "../../config/routes";
 import AddressRemoveForm from "./AddressRemoveForm";
 import Panel from "../Panel";
+import {addressActions as actions} from "../../actions";
+import Page from "../Page";
 
 class AddressRemove extends Component {
   handleRemoveCancel = () => {
@@ -12,16 +14,16 @@ class AddressRemove extends Component {
   }
 
   componentDidMount() {
-    const {address} = this.props
-    if (address.removeAddress == null) {
-      this.props.history.push(routes.ADDRESS.path)
-    }
+    const {dispatch} = this.props
+    const {id} = this.props.match.params
+
+    dispatch(actions.removeAddressLoad(id))
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const {address, history} = this.props
 
-    if (address.removeAddressFulfilled) {
+    if (address.failure === true || address.removeAddressFulfilled) {
       history.push(routes.ADDRESS.path)
     }
   }
@@ -36,19 +38,28 @@ class AddressRemove extends Component {
 
   render() {
     const {address} = this.props
-    const getAddress = this.getAddress(address)
 
-    if (!getAddress) {
+    if (address.loading) {
+      return (<div/>)
+    }
+
+    if (address.failure) {
+      return (<div/>)
+    }
+
+    if (address.removeAddress == null) {
       return (<div/>)
     }
 
     return (
-      <Panel title="Addresses" subTitle="Remove address">
-          <p>Are you sure you want to remove the `{getAddress.spending_address}` address from your NavPool account?</p>
+      <Page title="Addresses">
+        <Panel title="Remove address">
+          <p>Are you sure you want to remove the `{address.removeAddress.spending_address}` address from your NavPool account?</p>
           <p>Once removed any balance that remains in the cold staking address will cease staking.</p>
 
           <AddressRemoveForm handleCancel={() => this.handleRemoveCancel()}/>
-      </Panel>
+        </Panel>
+      </Page>
     )
   }
 }

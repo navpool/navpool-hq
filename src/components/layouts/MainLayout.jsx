@@ -21,7 +21,6 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 import {authenticationActions} from "../../actions/authentication-actions";
 import {routes} from '../../config/routes';
-import StatusBar from "../StatusBar";
 import {history} from "../../helpers";
 import {alertActions} from "../../actions";
 
@@ -124,7 +123,7 @@ class MainLayout extends Component {
   )
 
   render() {
-    const {classes, alert, children} = this.props
+    const {classes, children} = this.props
     const {mobileOpen} = this.state
     const renderDrawer = this.renderDrawer(classes)
 
@@ -170,7 +169,6 @@ class MainLayout extends Component {
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar}/>
-          {alert.message && <StatusBar variant={alert.type} text={alert.message} />}
           {children}
         </main>
       </div>

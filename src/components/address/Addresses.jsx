@@ -6,12 +6,13 @@ import withStyles from "@material-ui/core/styles/withStyles"
 import Button from "@material-ui/core/Button/index"
 import Actions from "../Actions";
 
-import CardAddress from "./CardAddress";
-import CardNoAddresses from "./CardNoAddresses";
+import Address from "./Address";
+import NoAddresses from "./NoAddresses";
 
 import {routes} from "../../config/routes";
 import {addressActions as actions} from "../../actions"
 import Page from "../Page";
+import AddressesFailure from "./AddressesFailure";
 
 const styles = theme => ({
   addresses: {
@@ -32,29 +33,45 @@ class Addresses extends Component {
     this.props.dispatch(actions.getAddresses())
   }
 
-  render() {
-    const {classes, address} = this.props
+  RenderContent = () => {
+    const {address} = this.props
 
     if (address.loading) {
       return (<div />)
     }
 
+    if (address.failure) {
+      return (<AddressesFailure />)
+    }
+
+    if (address.addresses.length === 0) {
+      return (<NoAddresses/>)
+    }
+
+    return (<div>
+        {address.addresses.map((p, key) =>
+          <Address key={key} index={key+1} address={p} />
+        )}
+      </div>
+    )
+  }
+
+  render() {
+    const {classes, address} = this.props
+
+    const showActions = address.loading === false && address.failure === false
+
     return (
       <Page title="Addresses">
-
-        { address.addresses.length === 0 && <CardNoAddresses/> }
         <div className={classes.addresses}>
-          {address.addresses.map((p, key) =>
-            <CardAddress key={key} index={key+1} address={p} />
-          )}
-          {/*            <IconButton aria-label="Delete" className={classes.margin} onClick={() => this.handleRemoveAddress(key)}>*/}
+          {this.RenderContent()}
         </div>
 
-        <Actions>
+        { showActions && <Actions>
           <Button variant="contained" className={classes.purpleButton} component={Link} to={routes.ADDRESS_ADD.path}>
             Add Address
           </Button>
-        </Actions>
+        </Actions>}
       </Page>
     )
   }

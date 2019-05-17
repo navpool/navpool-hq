@@ -26,8 +26,10 @@ class AddressRemoveForm extends Component {
     handleCancel: PropTypes.func.isRequired,
   }
 
-  handleSubmit = (address) => {
-    this.props.dispatch(actions.removeAddress(address))
+  handleSubmit = () => {
+    const {dispatch, address} = this.props
+
+    dispatch(actions.removeAddress(address.removeAddress))
   }
 
   handleCancel = () => {
@@ -38,7 +40,7 @@ class AddressRemoveForm extends Component {
     const { classes, address } = this.props
 
     return (
-      <ValidatorForm ref="form" onSubmit={() => this.handleSubmit(address)}>
+      <ValidatorForm ref="form" onSubmit={() => this.handleSubmit()}>
         <Actions>
           <Button variant="contained" type="submit" disabled={address.removingAddress} className={classes.purpleButton}>
             {address.removingAddress && <CircularProgress size={20} />} Remove Address
