@@ -16,7 +16,7 @@ const styles = theme => ({
   },
 });
 
-function CardNoAddresses(props) {
+function NoAddresses(props) {
   const {classes} = props
 
   return (
@@ -26,4 +26,4 @@ function CardNoAddresses(props) {
   )
 }
 
-export default withStyles(styles)(CardNoAddresses)
+export default withStyles(styles)(NoAddresses)

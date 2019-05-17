@@ -95,7 +95,7 @@ class FormPasswordChange extends Component {
         />
 
         <Actions>
-          <Button className={classes.purpleButton} type="submit" size="small">Change password</Button>
+          <Button className={classes.purpleButton} type="submit">Change password</Button>
         </Actions>
       </ValidatorForm>
     )

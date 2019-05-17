@@ -89,8 +89,8 @@ class FormTwoFactorEnable extends Component {
           />
 
           <Actions>
-            <Button variant="contained" type="submit" className={classes.purpleButton} size="small">Enable</Button>
-            <Button onClick={this.handleCancel} color="secondary" variant="contained" size="small">Cancel</Button>
+            <Button variant="contained" type="submit" className={classes.purpleButton}>Enable</Button>
+            <Button onClick={this.handleCancel} color="secondary" variant="contained">Cancel</Button>
           </Actions>
         </ValidatorForm>
       </div>

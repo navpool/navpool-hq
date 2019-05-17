@@ -48,7 +48,7 @@ class LoginForm extends Component {
 
     return (
       <ValidatorForm ref="form" onSubmit={this.handleSubmit}>
-        { authentication.error && <StatusBar variant="error" text="Unable to login" list={authentication.error} /> }
+        { authentication.error && <StatusBar variant="error" text={authentication.error.message} /> }
 
         <TextValidator
           fullWidth

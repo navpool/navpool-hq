@@ -1,12 +1,23 @@
 import {authHeader, handleResponse} from "../helpers";
 
 export const addressService = {
+  getAddress,
   getAddresses,
   addAddress,
   removeAddress,
 }
 
 const apiUrl = process.env.REACT_APP_API_URL
+
+function getAddress(id) {
+  return fetch(apiUrl+"/address/"+id, {
+    headers: authHeader()
+  })
+    .then(response => handleResponse(response, true))
+    .then(address => {
+      return address;
+    })
+}
 
 function getAddresses() {
   return fetch(apiUrl+"/address", {
@@ -30,8 +41,8 @@ function addAddress(hash, signature) {
     })
 }
 
-function removeAddress(address) {
-  return fetch(apiUrl+"/address", {
+function removeAddress(id) {
+  return fetch(apiUrl+"/address/"+id, {
     method: 'DELETE',
     headers: authHeader()
   })

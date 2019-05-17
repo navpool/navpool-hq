@@ -72,7 +72,7 @@ class AddressAddForm extends Component {
 
         <TextValidator
           fullWidth
-          label="Address hash"
+          label="Address Hash"
           onChange={this.handleChange}
           name="hash"
           autoComplete={"off"}
@@ -97,10 +97,10 @@ class AddressAddForm extends Component {
         <Button onClick={this.modalVerificationOpen}>What is a verification signature?</Button>
 
         <Actions>
-          <Button variant="contained" type="submit" disabled={address.addingAddress} className={classes.purpleButton} size="small">
+          <Button variant="contained" type="submit" disabled={address.addingAddress} className={classes.purpleButton}>
             {address.addingAddress && <CircularProgress size={20} />} Add Address
           </Button>
-          <Button variant="contained" color="secondary" onClick={this.handleCancel} size="small">Cancel</Button>
+          <Button variant="contained" color="secondary" onClick={this.handleCancel}>Cancel</Button>
         </Actions>
 
         <Modal

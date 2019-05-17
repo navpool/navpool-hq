@@ -46,9 +46,14 @@ export function authentication(state = initialState, action) {
       }
 
     case constants.LOGIN_FAILURE:
+      let error = action.error
+      if (action.error.code !== 401) {
+        error.message = "An unexpected error has occurred"
+      }
+
       return {
         loggingIn: false,
-        error: action.error
+        error: error,
       }
 
     case constants.LOGOUT:
