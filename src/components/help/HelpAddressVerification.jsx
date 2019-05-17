@@ -44,7 +44,7 @@ class HelpAddressVerification extends Component {
       <div style={getModalStyle()} className={isMobileOnly ? classes.rootMobile : classes.root}>
         <h5>What is a verification signature?</h5>
 
-        <p>The verification signature is prove that you own the address you want to add to your NavPool account</p>
+        <p>The verification signature is proof that you own the address you want to add to your NavPool account</p>
 
         <p><br/>Complete the following steps to create a verification signature</p>
         <ol className={classes.list}>
