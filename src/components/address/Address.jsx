@@ -101,7 +101,7 @@ class Address extends Component {
             <div className={classes.contentBlock}>
               <h4>Deposit Nav</h4>
               <p>Send NavCoin to the following address to deposit in your pool account.</p>
-              <p><a href="navcoin://{address.cold_staking_address}">{address.cold_staking_address}</a></p>
+              <p>{address.cold_staking_address}</p>
             </div>
 
             {/*<Divider/>*/}
