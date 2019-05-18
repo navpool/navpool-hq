@@ -101,7 +101,7 @@ class Address extends Component {
             <div className={classes.contentBlock}>
               <h4>Deposit Nav</h4>
               <p>Send NavCoin to the following address to deposit in your pool account.</p>
-              <p><a href="navcoin://{address.cold_staking_address}">{address.cold_staking_address}</a></p>
+              <p><a href={"navcoin://"+address.cold_staking_address}>{address.cold_staking_address}</a></p>
             </div>
 
             {/*<Divider/>*/}
@@ -116,7 +116,7 @@ class Address extends Component {
             <Divider/>
             <div className={classes.contentBlock}>
               <h4>Remove address</h4>
-              <p>Once removed, any funds that remain in the account will no longer be staked. Use the spending address</p>
+              <p>Remove this address from your account. Once removed, this address will no longer be staking NavCoin.</p>
               <div className={classes.actions}>
                 <Button variant="contained"
                         color="secondary"
