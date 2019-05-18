@@ -72,7 +72,7 @@ class AddressAddForm extends Component {
 
         <TextValidator
           fullWidth
-          label="Address Hash"
+          label="Spending Address"
           onChange={this.handleChange}
           name="hash"
           autoComplete={"off"}
