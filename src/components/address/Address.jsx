@@ -100,7 +100,7 @@ class Address extends Component {
             <Divider/>
             <div className={classes.contentBlock}>
               <h4>Deposit Nav</h4>
-              <p>Send NavCoin to the following address to deposit in your pool account.</p>
+              <p>Send NavCoin to the following address to deposit into your pool account.</p>
               <p>{address.cold_staking_address}</p>
             </div>
 
