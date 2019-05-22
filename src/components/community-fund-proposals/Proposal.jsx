@@ -20,17 +20,14 @@ const styles = theme => ({
   avatar: {
     display: 'none',
   },
+  title: {
+    wordBreak: 'break-all',
+  },
   cardHeader: {
     paddingBottom: 0,
   },
   content: {
     paddingTop: 0,
-    '& p': {
-      paddingBottom: theme.spacing.unit / 2,
-    },
-    '& a': {
-      wordBreak: 'break-all',
-    }
   },
   purpleButton: {
     color: '#ffffff',
@@ -60,7 +57,7 @@ class Proposal extends Component {
 
     return (
       <Card className={classes.root}>
-        <CardHeader className={classes.cardHeader} classes={{ avatar: classes.avatar }}
+        <CardHeader className={classes.cardHeader} classes={{ avatar: classes.avatar, title: classes.title }}
                     avatar={<span/>}
                     action={<span/>}
                     title={proposal.description}
