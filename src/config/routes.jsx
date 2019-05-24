@@ -5,7 +5,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PeopleIcon from '@material-ui/icons/People';
 
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/dashboard/Dashboard'
 import Account from '../components/account/Account'
 import AccountSecurity from "../components/account-security/AccountSecurity";
 import Address from '../components/address/Addresses'

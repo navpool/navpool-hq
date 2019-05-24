@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Heading from "./Heading";
+import Heading from "../Heading";
+import StakingReport from "./StakingReport";
 
 class Dashboard extends React.Component {
   render() {
@@ -8,6 +9,8 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Heading title="Dashboard" />
+
+        <StakingReport />
       </div>
     )
   }
