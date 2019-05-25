@@ -13,17 +13,11 @@ class StakingReport extends React.Component {
 
   render() {
     const {report} = this.props
-    let addressReports = null
-
-    if (!report.loadingReportStaking) {
-      addressReports = report.staking.map((item) => {
-        return <StakingReportAddress report={item}/>
-      })
-    }
+    const loaded = !report.loadingReportStaking && !report.errorReportStaking
 
     return (
       <Panel title="Staking report">
-        {addressReports}
+        {loaded && <StakingReportAddress report={report.staking} />}
       </Panel>
     )
   }

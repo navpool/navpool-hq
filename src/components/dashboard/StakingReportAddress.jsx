@@ -19,23 +19,23 @@ function StakingReportAddress(props) {
         <TableBody>
           <TableRow>
             <TableCell className={classes.tableCell}>Last 24 hours</TableCell>
-            <TableCell>{navFormat(report.periods[0].balance)} Nav</TableCell>
+            <TableCell>{navFormat(report.last24Hours.balance)} Nav</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className={classes.tableCell}>Last 7 days</TableCell>
-            <TableCell>{navFormat(report.periods[1].balance)} Nav</TableCell>
+            <TableCell>{navFormat(report.last7Days.balance)} Nav</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className={classes.tableCell}>Last 30 days</TableCell>
-            <TableCell>{navFormat(report.periods[2].balance)} Nav</TableCell>
+            <TableCell>{navFormat(report.last30Days.balance)} Nav</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className={classes.tableCell}>Last year</TableCell>
-            <TableCell>{navFormat(report.periods[3].balance)} Nav</TableCell>
+            <TableCell>{navFormat(report.lastYear.balance)} Nav</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className={classes.tableCell}>All time</TableCell>
-            <TableCell>{navFormat(report.periods[4].balance)} Nav</TableCell>
+            <TableCell>{navFormat(report.all.balance)} Nav</TableCell>
           </TableRow>
         </TableBody>
       </Table>
