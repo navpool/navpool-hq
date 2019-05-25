@@ -49,7 +49,7 @@ const styles = theme => ({
     '& p': {
       paddingBottom: theme.spacing.unit / 2,
     },
-    '& a': {
+    '& span': {
       wordBreak: 'break-all',
     },
     '& button, a': {
@@ -101,7 +101,7 @@ class Address extends Component {
             <div className={classes.contentBlock}>
               <h4>Deposit Nav</h4>
               <p>Send NavCoin to the following address to deposit into your pool account.</p>
-              <p>{address.cold_staking_address}</p>
+              <p><span>{address.cold_staking_address}</span></p>
             </div>
 
             {/*<Divider/>*/}
