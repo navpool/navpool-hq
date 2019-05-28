@@ -5,7 +5,6 @@ import StakingReport from "./StakingReport";
 
 class Dashboard extends React.Component {
   render() {
-    console.log("DASHBOARD");
     return (
       <div>
         <Heading title="Dashboard" />

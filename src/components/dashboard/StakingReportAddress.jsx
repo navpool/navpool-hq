@@ -18,7 +18,6 @@ const styles = () => ({
 function StakingReportAddress(props) {
   const {classes, report} = props
 
-  console.log(report);
   return (
     <div>
       <Table>

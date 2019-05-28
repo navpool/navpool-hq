@@ -83,7 +83,6 @@ function submitPaymentRequestVotes(votes) {
     service.submitPaymentRequestVotes(votes)
       .then(
         votes => {
-          console.log(votes);
           dispatch(success(votes));
           dispatch(alertActions.info("Your payment request votes have been updated"));
         },

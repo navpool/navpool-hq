@@ -77,18 +77,12 @@ class MainLayout extends Component {
     if (address.data === null) {
       dispatch(addressActions.getAddresses())
     }
-
-    console.log("Main Layout constructed");
   }
 
   state = {
     authenticated: true,
     mobileOpen: false,
   };
-
-  componentDidMount = () => {
-    console.log("Main Layout mounted");
-  }
 
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));

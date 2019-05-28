@@ -12,7 +12,6 @@ function getStakingReport() {
     service.getStakingReport()
       .then(
         report => {
-          console.log(report)
           dispatch(success(report));
         },
         error => {

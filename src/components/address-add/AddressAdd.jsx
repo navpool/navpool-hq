@@ -15,7 +15,6 @@ class AddressAdd extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("componentDidUpdate")
     const {address, history} = this.props
 
     if (address.addAddressFulfilled) {
