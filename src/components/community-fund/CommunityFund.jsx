@@ -1,14 +1,15 @@
 import React from "react";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
+import withStyles from "@material-ui/core/es/styles/withStyles";
+import Button from "@material-ui/core/Button";
 import Page from "../Page";
 import Panel from "../Panel";
-import Button from "@material-ui/core/Button";
 import Actions from "../Actions";
-import {Link} from "react-router-dom";
+
 import {routes} from "../../config/routes";
-import withStyles from "@material-ui/core/es/styles/withStyles";
 import {cfundProposalActions, cfundPaymentRequestActions} from "../../actions";
-import {connect} from "react-redux";
 
 const styles = () => ({
   purpleButton: {
@@ -22,8 +23,10 @@ const styles = () => ({
 
 class CommunityFund extends React.Component {
   componentDidMount() {
-    this.props.dispatch(cfundProposalActions.getProposals(false))
-    this.props.dispatch(cfundPaymentRequestActions.getPaymentRequests(false))
+    const {dispatch} = this.props
+
+    dispatch(cfundProposalActions.getProposals(false))
+    dispatch(cfundPaymentRequestActions.getPaymentRequests(false))
   }
 
   render() {

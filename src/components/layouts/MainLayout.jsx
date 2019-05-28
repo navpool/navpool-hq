@@ -22,7 +22,8 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import {authenticationActions} from "../../actions/authentication-actions";
 import {routes} from '../../config/routes';
 import {history} from "../../helpers";
-import {alertActions} from "../../actions";
+import {accountActions, addressActions, alertActions} from "../../actions";
+import LoadingAccountDetails from "../account/LoadingAccountDetails";
 
 const drawerWidth = 240
 
@@ -61,19 +62,33 @@ class MainLayout extends Component {
   constructor(props) {
     super(props)
 
-    const { dispatch } = this.props;
+    const {dispatch, account, address} = this.props;
 
     dispatch(authenticationActions.refresh())
 
     history.listen((location, action) => {
       dispatch(alertActions.clear())
     })
+
+    if (account.data === null) {
+      dispatch(accountActions.getAccount())
+    }
+
+    if (address.data === null) {
+      dispatch(addressActions.getAddresses())
+    }
+
+    console.log("Main Layout constructed");
   }
 
   state = {
     authenticated: true,
     mobileOpen: false,
   };
+
+  componentDidMount = () => {
+    console.log("Main Layout mounted");
+  }
 
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
@@ -123,7 +138,7 @@ class MainLayout extends Component {
   )
 
   render() {
-    const {classes, children} = this.props
+    const {classes, children, account, address} = this.props
     const {mobileOpen} = this.state
     const renderDrawer = this.renderDrawer(classes)
 
@@ -169,7 +184,8 @@ class MainLayout extends Component {
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar}/>
-          {children}
+
+         {!account.loaded || !address.loaded ? <LoadingAccountDetails /> : children}
         </main>
       </div>
     )
@@ -178,6 +194,8 @@ class MainLayout extends Component {
 
 const mapStateToProps = state => ({
   alert: state.alert,
+  account: state.account,
+  address: state.address,
 })
 
 export default withRouter(connect(mapStateToProps)(withStyles(styles)(MainLayout)));

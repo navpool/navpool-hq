@@ -10,9 +10,7 @@ import Address from "./Address";
 import NoAddresses from "./NoAddresses";
 
 import {routes} from "../../config/routes";
-import {addressActions as actions} from "../../actions"
 import Page from "../Page";
-import AddressesFailure from "./AddressesFailure";
 
 const styles = theme => ({
   addresses: {
@@ -29,27 +27,15 @@ const styles = theme => ({
 })
 
 class Addresses extends Component {
-  componentDidMount() {
-    this.props.dispatch(actions.getAddresses())
-  }
-
   RenderContent = () => {
     const {address} = this.props
 
-    if (address.loading) {
-      return (<div />)
-    }
-
-    if (address.failure) {
-      return (<AddressesFailure />)
-    }
-
-    if (address.addresses.length === 0) {
+    if (address.data.length === 0) {
       return (<NoAddresses/>)
     }
 
     return (<div>
-        {address.addresses.map((p, key) =>
+        {address.data.map((p, key) =>
           <Address key={key} index={key+1} address={p} />
         )}
       </div>
@@ -57,9 +43,7 @@ class Addresses extends Component {
   }
 
   render() {
-    const {classes, address} = this.props
-
-    const showActions = address.loading === false && address.failure === false
+    const {classes} = this.props
 
     return (
       <Page title="Addresses">
@@ -67,11 +51,11 @@ class Addresses extends Component {
           {this.RenderContent()}
         </div>
 
-        { showActions && <Actions>
+        <Actions>
           <Button variant="contained" className={classes.purpleButton} component={Link} to={routes.ADDRESS_ADD.path}>
             Add Address
           </Button>
-        </Actions>}
+        </Actions>
       </Page>
     )
   }

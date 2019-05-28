@@ -69,9 +69,9 @@ class FormTwoFactorEnable extends Component {
     return (
       <div>
         <p>Scan the QR code below with your two-factor authentication app on your phone.</p>
-        <p>If you can't scan enter this secret key instead: {account.account.two_factor.secret}</p>
+        <p>If you can't scan enter this secret key instead: {account.data.two_factor.secret}</p>
 
-        <QrCode value={account.account.two_factor.otpauth} alt={account.account.two_factor.secret} />
+        <QrCode value={account.data.two_factor.otpauth} alt={account.data.two_factor.secret} />
 
         <ValidatorForm ref="form" onSubmit={this.handleSubmit}>
           { account.error && <StatusBar text={account.error.error} variant="error" /> }

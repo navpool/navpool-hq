@@ -15,6 +15,7 @@ class AddressAdd extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("componentDidUpdate")
     const {address, history} = this.props
 
     if (address.addAddressFulfilled) {
@@ -31,18 +32,6 @@ class AddressAdd extends Component {
             </p>
 
             <AddressAddForm handleCancel={() => this.handleAddCancel()} />
-
-            {/*<Divider />*/}
-            {/*<h4>Follow these steps to create a verification signature:</h4>*/}
-            {/*<ol>*/}
-            {/*  <li>Launch your NavCoin core wallet</li>*/}
-            {/*  <li>Select `Sign message...` from the File menu</li>*/}
-            {/*  <li>Enter the NavCoin address you are adding to NavPool</li>*/}
-            {/*  <li>Enter `REGISTER FOR NAVPOOL` as the message</li>*/}
-            {/*  <li>Click the `SIGN MESSAGE` button</li>*/}
-            {/*  <li>Copy the generated signature</li>*/}
-            {/*  <li>Paste the signature into form field on this page</li>*/}
-            {/*</ol>*/}
           </Panel>
       </Page>
     )

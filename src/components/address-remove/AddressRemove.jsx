@@ -5,59 +5,55 @@ import {withRouter} from "react-router-dom";
 import {routes} from "../../config/routes";
 import AddressRemoveForm from "./AddressRemoveForm";
 import Panel from "../Panel";
-import {addressActions as actions} from "../../actions";
 import Page from "../Page";
 
 class AddressRemove extends Component {
+  state = { address: null };
+
   handleRemoveCancel = () => {
     this.props.history.push(routes.ADDRESS.path)
   }
 
   componentDidMount() {
-    const {dispatch} = this.props
-    const {id} = this.props.match.params
+    const {history, match, address} = this.props
+    const {id} = match.params
 
-    dispatch(actions.removeAddressLoad(id))
+    const addressToRemove = address.data.reduce((result, item) => {
+      if (item.id === id) { result = item }
+      return result
+    }, null)
+
+    if (addressToRemove === null) {
+      history.push(routes.ADDRESS.path)
+    }
+
+    this.setState({
+      address: addressToRemove,
+    })
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const {address, history} = this.props
 
-    if (address.failure === true || address.removeAddressFulfilled) {
+    if (address.removeAddressFulfilled) {
       history.push(routes.ADDRESS.path)
     }
   }
 
-  getAddress(address) {
-    if (typeof address == 'undefined' || address.removeAddress == null) {
-      return null
-    }
-
-    return address.addresses[address.removeAddress];
-  }
-
   render() {
-    const {address} = this.props
+    const {address} = this.state
 
-    if (address.loading) {
-      return (<div/>)
-    }
-
-    if (address.failure) {
-      return (<div/>)
-    }
-
-    if (address.removeAddress == null) {
+    if (address == null) {
       return (<div/>)
     }
 
     return (
       <Page title="Addresses">
         <Panel title="Remove address">
-          <p>Are you sure you want to remove the `{address.removeAddress.spending_address}` address from your NavPool account?</p>
+          <p>Are you sure you want to remove the `{address.spending_address}` address from your NavPool account?</p>
           <p>Once removed any balance that remains in the cold staking address will cease staking.</p>
 
-          <AddressRemoveForm handleCancel={() => this.handleRemoveCancel()}/>
+          <AddressRemoveForm handleCancel={() => this.handleRemoveCancel()} address={address} />
         </Panel>
       </Page>
     )

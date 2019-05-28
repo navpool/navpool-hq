@@ -7,7 +7,6 @@ import Page from "../Page";
 import FormTwoFactorEnable from "./FormTwoFactorEnable";
 import FormTwoFactorDisable from "./FormTwoFactorDisable";
 
-import {accountActions as actions} from "../../actions";
 import {routes} from "../../config/routes";
 import Panel from "../Panel";
 
@@ -16,16 +15,9 @@ const styles = () => ({
 })
 
 class AccountSecurity extends Component {
-  componentDidMount() {
-    if (this.props.account.loading) {
-      this.props.dispatch(actions.getAccount())
-    }
-  }
-
   componentDidUpdate(prevProps, prevState, snapshot) {
     const {account, history} = this.props
 
-    console.log(account);
     if (account.twoFactorFulfilled) {
       history.push(routes.ACCOUNT.path)
     }
@@ -39,12 +31,7 @@ class AccountSecurity extends Component {
 
   render() {
     const {account} = this.props
-
-    if (account.loading) {
-      return (<div/>)
-    }
-
-    const active = account.account.two_factor.active;
+    const active = account.data.two_factor.active;
 
     return (
       <Page title="Account">

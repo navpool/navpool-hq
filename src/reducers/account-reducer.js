@@ -1,27 +1,38 @@
 import {accountConstants as constants} from "../constants/account-constants";
 
 const initialState = {
-  loading: true,
-  account: {},
+  data: null,
+  loaded: false,
+  error: null,
+
   enabledTwoFactor: false,
   twoFactorFulfilled: false,
 }
 
 export function account(state = initialState, action) {
   switch (action.type) {
-    case constants.LOAD_ACCOUNT:
+    case constants.GET_ACCOUNT_REQUEST:
       return {
         ...state,
+        data: null,
+        loaded: false,
         error: null,
-        loading: true,
-        twoFactorFulfilled:  false,
       }
 
-    case constants.LOADED_ACCOUNT:
+    case constants.GET_ACCOUNT_SUCCESS:
       return {
         ...state,
-        loading: false,
-        account: action.account,
+        data: action.account,
+        loaded: true,
+        error: null,
+      }
+
+    case constants.GET_ACCOUNT_FAILURE:
+      return {
+        ...initialState,
+        data: null,
+        loaded: false,
+        error: action.error,
       }
 
     case constants.ACTIVATE_TWOFACTOR:
@@ -31,8 +42,8 @@ export function account(state = initialState, action) {
       }
 
     case constants.ACTIVATE_TWOFACTOR_SUCCESS:
-      state.account.two_factor = {
-        ...state.account.two_factor,
+      state.data.two_factor = {
+        ...state.data.two_factor,
         otpauth: action.twoFactor.otpauth,
         secret: action.twoFactor.secret,
       }
@@ -42,20 +53,13 @@ export function account(state = initialState, action) {
         enabledTwoFactor: true
       }
 
-    case constants.ENABLE_TWOFACTOR: {
-      return {
-        ...state,
-        error: null,
-      }
-    }
-
     case constants.ENABLE_TWOFACTOR_SUCCESS:
-      state.account.two_factor.active = true
-      state.account.two_factor.secret = null
-      state.account.two_factor.otpauth = null
-
+      state.data.two_factor = {
+        active: true,
+      }
       return {
         ...state,
+        enabledTwoFactor: true,
         twoFactorFulfilled:  true,
       }
 
@@ -64,18 +68,12 @@ export function account(state = initialState, action) {
         ...state,
         enabledTwoFactor: false,
         twoFactorFulfilled:  false,
-        error: action.error
       }
-
-    case constants.DISABLE_TWOFACTOR: {
-      return {
-        ...state,
-        error: null,
-      }
-    }
-
+      
     case constants.DISABLE_TWOFACTOR_SUCCESS:
-      state.account.two_factor.active = false
+      state.data.two_factor = {
+        active: false,
+      }
 
       return {
         ...state,
@@ -88,7 +86,6 @@ export function account(state = initialState, action) {
         ...state,
         enabledTwoFactor: true,
         twoFactorFulfilled:  false,
-        error: action.error
       }
 
     default:

@@ -5,7 +5,6 @@ import {alertActions} from "./alert-actions";
 export const addressActions = {
   getAddresses,
   addAddress,
-  removeAddressLoad,
   removeAddress
 };
 
@@ -25,9 +24,9 @@ function getAddresses() {
       )
   }
 
-  function request() {return {type: constants.ADDRESSES_LOAD_REQUEST}}
-  function success(addresses) {return {type: constants.ADDRESSES_LOAD_SUCCESS, addresses}}
-  function failure(error) {return {type: constants.ADDRESSES_LOAD_FAILURE, error}}
+  function request() {return {type: constants.GET_ADDRESSES_REQUEST}}
+  function success(addresses) {return {type: constants.GET_ADDRESSES_SUCCESS, addresses}}
+  function failure(error) {return {type: constants.GET_ADDRESSES_FAILURE, error}}
 }
 
 function addAddress(hash, signature) {
@@ -49,27 +48,6 @@ function addAddress(hash, signature) {
   function request(hash) { return { type: constants.ADD_ADDRESS_REQUEST, hash } }
   function success(address) { return { type: constants.ADD_ADDRESS_SUCCESS, address } }
   function failure(error) { return { type: constants.ADD_ADDRESS_FAILURE, error } }
-}
-
-function removeAddressLoad(address) {
-  return dispatch => {
-    dispatch(request(address));
-
-    service.getAddress(address)
-      .then(
-        address => {
-          dispatch(success(address));
-        },
-        error => {
-          dispatch(failure(error));
-          dispatch(alertActions.error(error));
-        }
-      )
-  }
-
-  function request(address) {return {type: constants.REMOVE_ADDRESS_LOAD_REQUEST, address}}
-  function success(address) {return {type: constants.REMOVE_ADDRESS_LOAD_SUCCESS, address}}
-  function failure(error) {return {type: constants.REMOVE_ADDRESS_LOAD_FAILURE, error}}
 }
 
 function removeAddress(address) {

@@ -47,6 +47,9 @@ class AddressAddForm extends Component {
     const { hash, signature} = this.state;
 
     this.props.dispatch(actions.addAddress(hash, signature))
+      .then(
+
+    )
   }
 
   handleCancel = () => {

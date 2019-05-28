@@ -21,7 +21,7 @@ const styles = () => ({
 class PanelSecurity extends Component {
   render() {
     const {classes, account} = this.props
-    const active = account.account.two_factor.active;
+    const active = account.data.two_factor.active;
 
     const subTitle = active ? 'Two-factor authentication is enabled' : 'Two-factor authentication is disabled'
 

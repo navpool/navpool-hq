@@ -1,6 +1,6 @@
-import {accountService as service} from "../services";
-import {alertActions} from "./alert-actions";
-import {accountConstants as constants} from "../constants";
+import {accountService as service} from "../services"
+import {alertActions} from "./alert-actions"
+import {accountConstants as constants} from "../constants"
 
 export const accountActions = {
   getAccount,
@@ -12,23 +12,23 @@ export const accountActions = {
 
 function getAccount() {
   return dispatch => {
-    dispatch(request());
+    dispatch(request())
 
     service.getAccount()
       .then(
         account => {
-          dispatch(success(account));
+          dispatch(success(account))
         },
         error => {
-          dispatch(failure(error));
-          dispatch(alertActions.warning(error));
+          dispatch(failure(error))
+          dispatch(alertActions.warning(error))
         }
       )
   }
 
-  function request() { return { type: constants.LOAD_ACCOUNT } }
-  function success(account) { return { type: constants.LOADED_ACCOUNT, account } }
-  function failure(error) { return { type: constants.FAILED_ACCOUNT, error } }
+  function request() { return { type: constants.GET_ACCOUNT_REQUEST } }
+  function success(account) { return { type: constants.GET_ACCOUNT_SUCCESS, account } }
+  function failure(error) { return { type: constants.GET_ACCOUNT_FAILURE, error } }
 }
 
 function changePassword(currentPassword, newPassword, confirmPassword) {
@@ -38,10 +38,10 @@ function changePassword(currentPassword, newPassword, confirmPassword) {
     service.changePassword(currentPassword, newPassword, confirmPassword)
       .then(
         () => {
-          dispatch(success());
+          dispatch(success())
         },
         error => {
-          dispatch(failure(error));
+          dispatch(failure(error))
         }
       )
   }
@@ -58,10 +58,10 @@ function activateTwoFactor() {
     service.activateTwoFactor()
       .then(
         (twoFactor) => {
-          dispatch(success(twoFactor));
+          dispatch(success(twoFactor))
         },
         error => {
-          dispatch(failure(error));
+          dispatch(failure(error))
         }
       )
   }
@@ -78,11 +78,12 @@ function enableTwoFactor(verificationCode) {
     service.enableTwoFactor(verificationCode)
       .then(
         () => {
-          dispatch(success());
-          dispatch(alertActions.info('Two factor authentication has been enabled on your account'));
+          dispatch(success())
+          dispatch(alertActions.info('Two factor authentication has been enabled on your account'))
         },
         error => {
-          dispatch(failure(error));
+          dispatch(alertActions.error(error))
+          dispatch(failure())
         }
       )
   }
@@ -94,16 +95,17 @@ function enableTwoFactor(verificationCode) {
 
 function disableTwoFactor(verificationCode) {
   return dispatch => {
-    dispatch(request());
+    dispatch(request())
 
     service.disableTwoFactor(verificationCode)
       .then(
         () => {
-          dispatch(success());
-          dispatch(alertActions.info('Two factor authentication has been disabled on your account'));
+          dispatch(success())
+          dispatch(alertActions.info('Two factor authentication has been disabled on your account'))
         },
         error => {
-          dispatch(failure(error));
+          dispatch(alertActions.error(error))
+          dispatch(failure())
         }
       )
   }

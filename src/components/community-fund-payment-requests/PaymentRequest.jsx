@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 import withStyles from '@material-ui/core/styles/withStyles'
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 
 import Actions from "../Actions";
 import VoteButton from "./VoteButton";
+import AutoLinkText from "react-autolink-text2/src";
 
 const styles = theme => ({
   root: {
@@ -17,16 +17,9 @@ const styles = theme => ({
   actions: {
     display: 'flex',
   },
-  avatar: {
-    display: 'none',
-  },
-  cardHeader: {
-    paddingBottom: 0,
-  },
   content: {
-    paddingTop: 0,
     '& p': {
-      paddingBottom: theme.spacing.unit / 2,
+      marginTop: theme.spacing.unit,
     },
     '& a': {
       wordBreak: 'break-all',
@@ -60,13 +53,10 @@ class PaymentRequest extends Component {
 
     return (
       <Card className={classes.root}>
-        <CardHeader className={classes.cardHeader} classes={{ avatar: classes.avatar }}
-                    avatar={<span/>}
-                    action={<span/>}
-                    title={paymentRequest.description}
-                    subheader={`Requested amount: ${paymentRequest.requestedAmount} Nav`}
-        />
         <CardContent className={classes.content}>
+          <AutoLinkText text={paymentRequest.description} linkProps={{target:'_blank', rel:'nofollow'}} />
+          <p>{`Requested amount: ${paymentRequest.requestedAmount} Nav`}</p>
+
           <Actions>
             <VoteButton value="YES" paymentRequest={paymentRequest} />
             <VoteButton value="NO" paymentRequest={paymentRequest} />

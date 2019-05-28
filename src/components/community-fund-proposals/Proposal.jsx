@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 import withStyles from '@material-ui/core/styles/withStyles'
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 
 import Actions from "../Actions";
 import VoteButton from "./VoteButton";
+import AutoLinkText from "react-autolink-text2/src";
 
 const styles = theme => ({
   root: {
@@ -17,17 +17,13 @@ const styles = theme => ({
   actions: {
     display: 'flex',
   },
-  avatar: {
-    display: 'none',
-  },
-  title: {
-    wordBreak: 'break-all',
-  },
-  cardHeader: {
-    paddingBottom: 0,
-  },
   content: {
-    paddingTop: 0,
+    '& p': {
+      marginTop: theme.spacing.unit,
+    },
+    '& a': {
+      wordBreak: 'break-all',
+    }
   },
   purpleButton: {
     color: '#ffffff',
@@ -57,13 +53,10 @@ class Proposal extends Component {
 
     return (
       <Card className={classes.root}>
-        <CardHeader className={classes.cardHeader} classes={{ avatar: classes.avatar, title: classes.title }}
-                    avatar={<span/>}
-                    action={<span/>}
-                    title={proposal.description}
-                    subheader={`Requested amount: ${proposal.requestedAmount} Nav`}
-        />
         <CardContent className={classes.content}>
+          <AutoLinkText text={proposal.description} linkProps={{target:'_blank', rel:'nofollow'}} />
+          <p>{`Requested amount: ${proposal.requestedAmount} Nav`}</p>
+
           <Actions>
             <VoteButton value="YES" proposal={proposal} />
             <VoteButton value="NO" proposal={proposal} />
