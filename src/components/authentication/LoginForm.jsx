@@ -76,7 +76,7 @@ class LoginForm extends Component {
 
         <TextValidator
           fullWidth
-          label="Two factor authentication"
+          label="Two factor authentication (optional)"
           onChange={this.handleChange}
           name="twoFactor"
           autoComplete={"off"}
