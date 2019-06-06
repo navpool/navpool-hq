@@ -10,6 +10,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import {routes} from "../../config/routes";
 import Badge from "@material-ui/core/Badge";
+import StatusBar from "../StatusBar";
 
 const styles = (theme) => ({
   proposals: {
@@ -26,15 +27,22 @@ const styles = (theme) => ({
     '&:hover': {
       backgroundColor: "#5d3f8d",
     },
+  },
+  status: {
+    marginBottom: theme.spacing.unit * 2,
   }
 })
 
 class CommunityFundProposals extends React.Component {
-  state = { votes: [] };
+  state = {
+    votes: [],
+    hasAddress: false,
+  };
 
   componentDidMount() {
-    window.scrollTo(0, 0)
-    this.props.dispatch(actions.getProposals(true))
+    const {dispatch} = this.props
+
+    dispatch(actions.getProposals(true))
   }
 
   handleGoBack = () => {
@@ -75,7 +83,8 @@ class CommunityFundProposals extends React.Component {
   }
 
   render() {
-    const {classes, proposals} = this.props
+    const {classes, proposals, address} = this.props
+    const hasAddress = address.data !== null && address.data.length !== 0
 
     if (!proposals.proposalsLoaded || !proposals.proposalVotesLoaded) {
       return (<div/>)
@@ -84,6 +93,9 @@ class CommunityFundProposals extends React.Component {
     return (
       <Page title="Community fund" subtitle="Proposals">
         <div className={classes.proposals}>
+
+          {!hasAddress && <StatusBar classes={{root: classes.status}} variant="error" text="You cannot vote for community fund proposals until you have first added your NavCoin address to your account." />}
+
           {this.dirtyVotes() !== 0 && <div className={classes.update}>
             <Badge color="secondary" badgeContent={this.dirtyVotes()}>
               <Button className={classes.purpleButton} onClick={this.handleVoteSubmit}>Update Votes</Button>
@@ -92,7 +104,7 @@ class CommunityFundProposals extends React.Component {
           }
 
           {proposals.proposals.map((p, key) =>
-            <Proposal key={key} index={key+1} proposal={p} onUpdate={this.handleVoteUpdate}/>
+            <Proposal key={key} index={key+1} proposal={p} disabled={!hasAddress} onUpdate={this.handleVoteUpdate}/>
           )}
         </div>
         <Actions>
@@ -104,6 +116,7 @@ class CommunityFundProposals extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  address: state.address,
   proposals: state.cfundProposal
 })
 

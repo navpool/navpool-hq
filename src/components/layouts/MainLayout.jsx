@@ -32,7 +32,7 @@ const styles = theme => ({
     display: 'flex',
   },
   appBar: {
-    backgroundColor: '#7d5ab5',
+    background: "linear-gradient(45deg, rgba(68, 178, 233, 1) 0%, rgba(197, 41, 181, 1) 100%)",
     zIndex: theme.zIndex.drawer + 1,
   },
   toolBar: {

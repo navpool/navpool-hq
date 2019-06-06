@@ -11,6 +11,7 @@ import Actions from "../Actions";
 
 import {routes} from "../../config/routes";
 import {cfundPaymentRequestActions as actions} from "../../actions";
+import StatusBar from "../StatusBar";
 
 const styles = (theme) => ({
   paymentRequests: {
@@ -27,6 +28,9 @@ const styles = (theme) => ({
     '&:hover': {
       backgroundColor: "#5d3f8d",
     },
+  },
+  status: {
+    marginBottom: theme.spacing.unit * 2,
   }
 })
 
@@ -76,7 +80,8 @@ class CommunityFundProposals extends React.Component {
   }
 
   render() {
-    const {classes, paymentRequests} = this.props
+    const {classes, paymentRequests, address} = this.props
+    const hasAddress = address.data !== null && address.data.length !== 0
 
     if (!paymentRequests.paymentRequestsLoaded || !paymentRequests.paymentRequestVotesLoaded) {
       return (<div/>)
@@ -85,6 +90,9 @@ class CommunityFundProposals extends React.Component {
     return (
       <Page title="Community fund" subtitle="Payment Requests">
         <div className={classes.paymentRequests}>
+
+          {!hasAddress && <StatusBar classes={{root: classes.status}} variant="error" text="You cannot vote for community fund payment requests until you have first added your NavCoin address to your account." />}
+
           {this.dirtyVotes() !== 0 && <div className={classes.update}>
             <Badge color="secondary" badgeContent={this.dirtyVotes()}>
               <Button className={classes.purpleButton} onClick={this.handleVoteSubmit}>Update Votes</Button>
@@ -93,7 +101,7 @@ class CommunityFundProposals extends React.Component {
           }
 
           {paymentRequests.paymentRequests.map((p, key) =>
-            <PaymentRequest key={key} index={key+1} paymentRequest={p} onUpdate={this.handleVoteUpdate}/>
+            <PaymentRequest key={key} index={key+1} paymentRequest={p} disabled={!hasAddress} onUpdate={this.handleVoteUpdate}/>
           )}
         </div>
         <Actions>
@@ -105,6 +113,7 @@ class CommunityFundProposals extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  address: state.address,
   paymentRequests: state.cfundPaymentRequest
 })
 

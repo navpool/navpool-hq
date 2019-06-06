@@ -39,6 +39,7 @@ class PaymentRequest extends Component {
 
   static propTypes = {
     onUpdate: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -49,7 +50,7 @@ class PaymentRequest extends Component {
   }
 
   render() {
-    const {classes, paymentRequest} = this.props
+    const {classes, paymentRequest, disabled} = this.props
 
     return (
       <Card className={classes.root}>
@@ -58,9 +59,9 @@ class PaymentRequest extends Component {
           <p>{`Requested amount: ${paymentRequest.requestedAmount} Nav`}</p>
 
           <Actions>
-            <VoteButton value="YES" paymentRequest={paymentRequest} />
-            <VoteButton value="NO" paymentRequest={paymentRequest} />
-            <VoteButton value="ABSTAIN" paymentRequest={paymentRequest} />
+            <VoteButton value="YES" paymentRequest={paymentRequest} disabled={disabled} />
+            <VoteButton value="NO" paymentRequest={paymentRequest} disabled={disabled} />
+            <VoteButton value="ABSTAIN" paymentRequest={paymentRequest} disabled={disabled} />
           </Actions>
         </CardContent>
       </Card>

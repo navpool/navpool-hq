@@ -39,6 +39,7 @@ class Proposal extends Component {
 
   static propTypes = {
     onUpdate: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -49,7 +50,7 @@ class Proposal extends Component {
   }
 
   render() {
-    const {classes, proposal} = this.props
+    const {classes, proposal, disabled} = this.props
 
     return (
       <Card className={classes.root}>
@@ -58,9 +59,9 @@ class Proposal extends Component {
           <p>{`Requested amount: ${proposal.requestedAmount} Nav`}</p>
 
           <Actions>
-            <VoteButton value="YES" proposal={proposal} />
-            <VoteButton value="NO" proposal={proposal} />
-            <VoteButton value="ABSTAIN" proposal={proposal} />
+            <VoteButton value="YES" proposal={proposal} disabled={disabled} />
+            <VoteButton value="NO" proposal={proposal} disabled={disabled} />
+            <VoteButton value="ABSTAIN" proposal={proposal} disabled={disabled} />
           </Actions>
         </CardContent>
       </Card>

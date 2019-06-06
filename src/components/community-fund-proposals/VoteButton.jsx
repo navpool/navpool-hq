@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
-import {cfundProposalActions as actions} from "../../actions";
+import {alertActions, cfundProposalActions as actions} from "../../actions";
 
 const styles = () => ({
   purpleButton: {
@@ -59,13 +59,12 @@ class VoteButton extends Component {
     vote.dirty = newVote !== vote.originalVote;
     vote.vote = newVote;
 
+    this.props.dispatch(alertActions.clear())
     this.props.dispatch(actions.updateProposalVotes(proposals.votes))
-
-    // this.props.onUpdate(this.props.proposal.hash, newVote, newVote !== originalVote)
   }
 
   render() {
-    const {classes, proposals, value} = this.props
+    const {classes, proposals, value, disabled} = this.props
 
     if (typeof proposals === 'undefined') {
       return (<div />)
@@ -74,18 +73,18 @@ class VoteButton extends Component {
     const vote = this.getProposalVote()
 
     if (vote === null) {
-      return (<Button variant="outlined" onClick={() => this.updateVote(value)}>{value}</Button>)
+      return (<Button disabled={disabled} variant="outlined" onClick={() => this.updateVote(value)}>{value}</Button>)
     }
 
     if (vote.vote === value) {
-      return (<Button className={classes.purpleButton} onClick={() => this.updateVote(value)}>{value}</Button>)
+      return (<Button disabled={disabled} className={classes.purpleButton} onClick={() => this.updateVote(value)}>{value}</Button>)
     }
 
     if (vote.originalVote === value) {
-      return (<Button className={classes.purpleOutlineButton} onClick={() => this.updateVote(value)}>{value}</Button>)
+      return (<Button disabled={disabled} className={classes.purpleOutlineButton} onClick={() => this.updateVote(value)}>{value}</Button>)
     }
 
-    return (<Button variant="outlined" onClick={() => this.updateVote(value)}>{value}</Button>)
+    return (<Button disabled={disabled} variant="outlined" onClick={() => this.updateVote(value)}>{value}</Button>)
   }
 }
 
