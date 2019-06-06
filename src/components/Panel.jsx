@@ -14,7 +14,10 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 2,
     '& p': {
-      paddingBottom: theme.spacing.unit / 2,
+      paddingBottom: theme.spacing.unit * 2,
+    },
+    '& p.last': {
+      paddingBottom: 0,
     }
   }
 })

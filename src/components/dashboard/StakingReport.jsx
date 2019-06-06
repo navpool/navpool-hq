@@ -11,17 +11,17 @@ import {reportActions as actions} from "../../actions";
 const styles = () => ({
   tableCell: {
     padding: "4px 0 4px 0",
-    width: '43%',
+    width: '40%',
   },
   tableCenter: {
     textAlign: "center",
     padding: "4px 0 4px 0",
-    width: '13%',
+    width: '10%',
   },
   tableRight: {
     textAlign: "right",
     padding: "4px 0 4px 0",
-    width: '43%',
+    width: '50%',
   },
 })
 
