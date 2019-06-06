@@ -27,7 +27,7 @@ class PanelSecurity extends Component {
 
     return (
       <Panel title="Security" subTitle={subTitle}>
-        <p>
+        <p className="last">
           Two-factor authentication adds an additional layer of security to your account.
           We'll ask you to confirm your 2FA when you login to your account.
         </p>

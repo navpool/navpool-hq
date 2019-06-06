@@ -10,7 +10,7 @@ const styles = () => ({
 function PanelPersonalDetails() {
   return (
     <Panel title="Personal details" subTitle="This is an anonymous staking pool">
-      <p>We do not hold any personal details.</p>
+      <p className="last">We do not hold any personal details.</p>
     </Panel>
   )
 }
