@@ -4,7 +4,6 @@ import {isMobileOnly} from 'react-device-detect';
 
 import withStyles from '@material-ui/core/styles/withStyles'
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import Paper from "@material-ui/core/Paper/index";
 import Avatar from "@material-ui/core/Avatar/index";
 import Typography from "@material-ui/core/Typography/index";
@@ -19,7 +18,7 @@ const styles = theme => ({
   root: {
     height: "100%",
     width: "100%",
-    background: "url(/login-bg.jpg)",
+    background: "linear-gradient(45deg, rgba(68, 178, 233, 0.88), rgba(197, 41, 181, 0.88)), url(/login-bg.jpg) fixed center center",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -98,9 +97,8 @@ class Login extends React.Component {
 
             <RegisterForm />
 
-            <p>Already Registered? <Link component={Link} to={routes.LOGIN.path}>Login</Link></p>
+            <p>Already Registered? <Link to={routes.LOGIN.path}>Login</Link></p>
           </Paper>
-          <p className={classes.love}>Made with <FavoriteIcon className={classes.favorite} /> by the Nav community</p>
         </div>
       </div>
     );
