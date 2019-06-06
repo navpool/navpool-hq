@@ -8,31 +8,31 @@ export const alertActions = {
   clear,
 };
 
-function success(error) {
+function success(message) {
   return {
     type: alertConstants.SUCCESS,
-    message: getMessage(error)
+    message: getMessage(message)
   };
 }
 
-function info(error) {
+function info(message) {
   return {
     type: alertConstants.INFO,
-    message: getMessage(error)
+    message: getMessage(message)
   };
 }
 
-function warning(error) {
+function warning(message) {
   return {
     type: alertConstants.WARNING,
-    message: getMessage(error)
+    message: getMessage(message)
   };
 }
 
-function error(error) {
+function error(message) {
   return {
     type: alertConstants.ERROR,
-    message: getMessage(error)
+    message: getMessage(message)
   };
 }
 
