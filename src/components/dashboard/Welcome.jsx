@@ -11,7 +11,7 @@ class Welcome extends React.Component {
 
         <p>
           Contact us if require assistance setting up your account or have any feature requests you would like to see
-          included. You will find support using NavPool on the <a href="https://discord.gg/5C2hSK" target="_blank" rel="noopener noreferrer">NavCoin discord server</a>.
+          included. You will find support using NavPool on the <a href="https://discord.gg/MsbeChn" target="_blank" rel="noopener noreferrer">NavCoin discord server</a>.
         </p>
 
         <p className="last">Happy Staking!</p>

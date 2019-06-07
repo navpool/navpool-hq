@@ -99,7 +99,7 @@ class Login extends React.Component {
             <LoginForm />
 
             <p>Need an account? <Link to={routes.REGISTER.path}>Sign up</Link></p>
-            <p>For support <a href="https://discord.gg/5C2hSK" target="_blank" rel="noopener noreferrer">Contact us on discord</a></p>
+            <p>For support <a href="https://discord.gg/MsbeChn" target="_blank" rel="noopener noreferrer">Contact us on discord</a></p>
           </Paper>
         </div>
       </div>
