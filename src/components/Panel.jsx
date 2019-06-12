@@ -7,7 +7,6 @@ import SubHeading from "./SubHeading";
 const styles = theme => ({
   root: {
     clear: 'both',
-    maxWidth: '750px',
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 4,
   },

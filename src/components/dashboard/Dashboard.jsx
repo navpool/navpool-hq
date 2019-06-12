@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Heading from "../Heading";
 import StakingReport from "./StakingReport";
 import Welcome from "./Welcome";
+import NetworkReport from "./NetworkReport";
+import Page from "../Page";
 
 class Dashboard extends React.Component {
   render() {
@@ -10,16 +11,11 @@ class Dashboard extends React.Component {
     const hasAddress = address.data !== null && address.data.length !== 0
 
     return (
-      <div>
-        <Heading title="Dashboard" />
+      <Page title="Dashboard">
         <Welcome/>
-
-        {hasAddress &&
-          <div>
-            <StakingReport />
-          </div>
-        }
-      </div>
+        <NetworkReport />
+        {hasAddress && <StakingReport /> }
+      </Page>
     )
   }
 }
