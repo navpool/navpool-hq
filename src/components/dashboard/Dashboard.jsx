@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import StakingReport from "./StakingReport";
 import Welcome from "./Welcome";
-import NetworkReport from "./NetworkReport";
 import Page from "../Page";
 
 class Dashboard extends React.Component {
@@ -13,7 +12,6 @@ class Dashboard extends React.Component {
     return (
       <Page title="Dashboard">
         <Welcome/>
-        <NetworkReport />
         {hasAddress && <StakingReport /> }
       </Page>
     )

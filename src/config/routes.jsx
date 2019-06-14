@@ -18,6 +18,7 @@ import LoginLayout from "../components/layouts/LoginLayout";
 import CommunityFundProposals from "../components/community-fund-proposals/CommunityFundProposals";
 import CommunityFundPaymentRequests from "../components/community-fund-payment-requests/CommunityFundPaymentRequests";
 import Register from "../components/authentication/Register";
+import Network from "../components/network/Network";
 
 export const routes = {
   HOMEPAGE: {
@@ -79,6 +80,12 @@ export const routes = {
   COMMUNITY_FUND_PAYMENT_REQUESTS: {
     component: CommunityFundPaymentRequests,
     path: "/community-fund/payment-requests",
+    layout: MainLayout,
+    secure: true,
+  },
+  NETWORK: {
+    component: Network,
+    path: "/network",
     layout: MainLayout,
     secure: true,
   },

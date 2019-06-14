@@ -27,7 +27,7 @@ const styles = () => ({
   }
 })
 
-function NetworkStaking(props) {
+function StatusPower(props) {
   const {classes, staking} = props
 
   return (
@@ -41,4 +41,4 @@ function NetworkStaking(props) {
   )
 }
 
-export default withStyles(styles)(NetworkStaking)
+export default withStyles(styles)(StatusPower)

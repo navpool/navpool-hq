@@ -14,7 +14,7 @@ const styles = theme => ({
   }
 })
 
-function NetworkWeight(props) {
+function StatusWeight(props) {
   const {classes, weight} = props
 
   return (
@@ -26,4 +26,4 @@ function NetworkWeight(props) {
   )
 }
 
-export default withStyles(styles)(NetworkWeight)
+export default withStyles(styles)(StatusWeight)

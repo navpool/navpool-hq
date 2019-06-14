@@ -16,7 +16,7 @@ const styles = () => ({
   }
 })
 
-function NetworkAccounts(props) {
+function StatusAccounts(props) {
   const {classes, accounts} = props
 
   return (
@@ -28,4 +28,4 @@ function NetworkAccounts(props) {
   )
 }
 
-export default withStyles(styles)(NetworkAccounts)
+export default withStyles(styles)(StatusAccounts)
