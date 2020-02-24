@@ -27,7 +27,7 @@ class AddressAdd extends Component {
         <Page title="Addresses">
           <Panel title="Add new address">
             <p>
-              To add a new address to your pool account you'll need the public hash of the address and a signature to prove ownership.
+              To add a new address to your pool account you'll need the public key of the address and a signature to prove ownership.
             </p>
 
             <AddressAddForm handleCancel={() => this.handleAddCancel()} />
