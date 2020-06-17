@@ -10,7 +10,7 @@ const apiUrl = process.env.REACT_APP_API_URL
 const explorerUrl = process.env.REACT_APP_EXPLORER_URL
 
 function getProposals() {
-  return fetch(explorerUrl+"/community-fund/proposal?state=pending", {})
+  return fetch(explorerUrl+"/dao/cfund/proposal?state=0", {})
     .then((response) => handleResponse(response, true))
     .then(proposals => {
       return proposals;

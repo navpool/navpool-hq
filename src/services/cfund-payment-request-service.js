@@ -10,7 +10,7 @@ const apiUrl = process.env.REACT_APP_API_URL
 const explorerUrl = process.env.REACT_APP_EXPLORER_URL
 
 function getPaymentRequests() {
-  return fetch(explorerUrl+"/community-fund/payment-request?state=pending", {})
+  return fetch(explorerUrl+"/dao/cfund/payment-request?state=0", {})
     .then((response) => handleResponse(response, true))
     .then(paymentRequests => {
       return paymentRequests;
