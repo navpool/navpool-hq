@@ -92,7 +92,7 @@ class Address extends Component {
                       </IconButton>
                     }
                     title={address.spending_address}
-                    subheader={`Pool balance: ${navFormat(address.balance)} Nav`}
+                    subheader={`Pool balance: ${address.balance} Nav`}
         />
 
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
